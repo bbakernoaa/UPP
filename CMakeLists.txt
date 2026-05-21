@@ -107,16 +107,14 @@ if(BUILD_POSTEXEC)
   if(BUILD_WITH_WRFIO)
     find_package(wrf_io REQUIRED)
   endif()
-  if(IFI_FOUND)
-    if(CMAKE_Fortran_COMPILER_ID MATCHES "^Intel$")
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -cxxlib")
-    elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^GNU$")
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lstdc++")
-    elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU|AppleClang)$")
-      # This one is a wild guess. I haven't tried linking a Fortran
-      # executable with C++ libraries in clang.
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
-    endif()
+  if(CMAKE_Fortran_COMPILER_ID MATCHES "^Intel$")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -cxxlib")
+  elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(IntelLLVM|GNU)$")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lstdc++")
+  elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(Clang|AppleClang)$")
+    # This one is a wild guess. I haven't tried linking a Fortran
+    # executable with C++ libraries in clang.
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
   endif()
 endif()
 
