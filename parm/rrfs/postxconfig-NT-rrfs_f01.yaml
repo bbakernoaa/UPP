@@ -3364,86 +3364,12 @@ paramset:
     type_of_time_inc: '?'
     stat_unit_time_key_succ: '?'
     bit_map_flag: '?'
-  - post_avblfldidx: 746
-    shortname: ACM_GRAUPEL_ON_SURFACE
-    longname: '?'
-    mass_windpoint: 1
-    pdstmpl: tmpl4_8
-    pname: FROZR
-    table_info: NCEP
-    stats_proc: ACM
-    fixed_sfc1_type: surface
-    scale_fact_fixed_sfc1: ['?']
-    level: ['?']
-    fixed_sfc2_type: '?'
-    scale_fact_fixed_sfc2: ['?']
-    level2: ['?']
-    aerosol_type: '?'
-    prob_type: '?'
-    typ_intvl_size: '?'
-    scale_fact_1st_size: 0
-    scale_val_1st_size: 0
-    scale_fact_2nd_size: 0
-    scale_val_2nd_size: 0
-    typ_intvl_wvlen: '?'
-    scale_fact_1st_wvlen: 0
-    scale_val_1st_wvlen: 0
-    scale_fact_2nd_wvlen: 0
-    scale_val_2nd_wvlen: 0
-    scale_fact_lower_limit: 0
-    scale_val_lower_limit: 0
-    scale_fact_upper_limit: 0
-    scale_val_upper_limit: 0
-    scale: [6]
-    stat_miss_val: 0
-    leng_time_range_prev: 0
-    time_inc_betwn_succ_fld: 0
-    type_of_time_inc: '?'
-    stat_unit_time_key_succ: '?'
-    bit_map_flag: '?'
   - post_avblfldidx: 775
     shortname: BUCKET_GRAUPEL_ON_SURFACE
     longname: bucket graupel precipitation on surface
     mass_windpoint: 1
     pdstmpl: tmpl4_8
     pname: FROZR
-    table_info: NCEP
-    stats_proc: ACM
-    fixed_sfc1_type: surface
-    scale_fact_fixed_sfc1: ['?']
-    level: ['?']
-    fixed_sfc2_type: '?'
-    scale_fact_fixed_sfc2: ['?']
-    level2: ['?']
-    aerosol_type: '?'
-    prob_type: '?'
-    typ_intvl_size: '?'
-    scale_fact_1st_size: 0
-    scale_val_1st_size: 0
-    scale_fact_2nd_size: 0
-    scale_val_2nd_size: 0
-    typ_intvl_wvlen: '?'
-    scale_fact_1st_wvlen: 0
-    scale_val_1st_wvlen: 0
-    scale_fact_2nd_wvlen: 0
-    scale_val_2nd_wvlen: 0
-    scale_fact_lower_limit: 0
-    scale_val_lower_limit: 0
-    scale_fact_upper_limit: 0
-    scale_val_upper_limit: 0
-    scale: [6]
-    stat_miss_val: 0
-    leng_time_range_prev: 0
-    time_inc_betwn_succ_fld: 0
-    type_of_time_inc: '?'
-    stat_unit_time_key_succ: '?'
-    bit_map_flag: '?'
-  - post_avblfldidx: 782
-    shortname: ACM_FRAIN_ON_SURFACE
-    longname: '?'
-    mass_windpoint: 1
-    pdstmpl: tmpl4_8
-    pname: FRZR
     table_info: NCEP
     stats_proc: ACM
     fixed_sfc1_type: surface
@@ -3512,43 +3438,6 @@ paramset:
     type_of_time_inc: '?'
     stat_unit_time_key_succ: '?'
     bit_map_flag: '?'
-  - post_avblfldidx: 1004
-    shortname: ACM_SNOWFALL_ON_SURFACE
-    longname: '?'
-    mass_windpoint: 1
-    pdstmpl: tmpl4_8
-    pname: TSNOWP
-    table_info: '?'
-    stats_proc: ACM
-    fixed_sfc1_type: surface
-    scale_fact_fixed_sfc1: ['?']
-    level: ['?']
-    fixed_sfc2_type: '?'
-    scale_fact_fixed_sfc2: ['?']
-    level2: ['?']
-    aerosol_type: '?'
-    prob_type: '?'
-    typ_intvl_size: '?'
-    scale_fact_1st_size: 0
-    scale_val_1st_size: 0
-    scale_fact_2nd_size: 0
-    scale_val_2nd_size: 0
-    typ_intvl_wvlen: '?'
-    scale_fact_1st_wvlen: 0
-    scale_val_1st_wvlen: 0
-    scale_fact_2nd_wvlen: 0
-    scale_val_2nd_wvlen: 0
-    scale_fact_lower_limit: 0
-    scale_val_lower_limit: 0
-    scale_fact_upper_limit: 0
-    scale_val_upper_limit: 0
-    scale: [6]
-    stat_miss_val: 0
-    leng_time_range_prev: 0
-    time_inc_betwn_succ_fld: 0
-    type_of_time_inc: '?'
-    stat_unit_time_key_succ: '?'
-    bit_map_flag: '?'
   - post_avblfldidx: 1005
     shortname: BUCKET_SNOWFALL_ON_SURFACE
     longname: '?'
@@ -3580,43 +3469,6 @@ paramset:
     scale_fact_upper_limit: 0
     scale_val_upper_limit: 0
     scale: [6]
-    stat_miss_val: 0
-    leng_time_range_prev: 0
-    time_inc_betwn_succ_fld: 0
-    type_of_time_inc: '?'
-    stat_unit_time_key_succ: '?'
-    bit_map_flag: '?'
-  - post_avblfldidx: 417
-    shortname: CACM_APCP_ON_SURFACE
-    longname: '?'
-    mass_windpoint: 1
-    pdstmpl: tmpl4_8
-    pname: APCP
-    table_info: '?'
-    stats_proc: ACM
-    fixed_sfc1_type: surface
-    scale_fact_fixed_sfc1: ['?']
-    level: ['?']
-    fixed_sfc2_type: '?'
-    scale_fact_fixed_sfc2: ['?']
-    level2: ['?']
-    aerosol_type: '?'
-    prob_type: '?'
-    typ_intvl_size: '?'
-    scale_fact_1st_size: 0
-    scale_val_1st_size: 0
-    scale_fact_2nd_size: 0
-    scale_val_2nd_size: 0
-    typ_intvl_wvlen: '?'
-    scale_fact_1st_wvlen: 0
-    scale_val_1st_wvlen: 0
-    scale_fact_2nd_wvlen: 0
-    scale_val_2nd_wvlen: 0
-    scale_fact_lower_limit: 0
-    scale_val_lower_limit: 0
-    scale_fact_upper_limit: 0
-    scale_val_upper_limit: 0
-    scale: [-4]
     stat_miss_val: 0
     leng_time_range_prev: 0
     time_inc_betwn_succ_fld: 0
@@ -12661,86 +12513,12 @@ paramset:
     type_of_time_inc: '?'
     stat_unit_time_key_succ: '?'
     bit_map_flag: '?'
-  - post_avblfldidx: 417
-    shortname: CACM_APCP_ON_SURFACE
-    longname: '?'
-    mass_windpoint: 1
-    pdstmpl: tmpl4_8
-    pname: APCP
-    table_info: '?'
-    stats_proc: ACM
-    fixed_sfc1_type: surface
-    scale_fact_fixed_sfc1: ['?']
-    level: ['?']
-    fixed_sfc2_type: '?'
-    scale_fact_fixed_sfc2: ['?']
-    level2: ['?']
-    aerosol_type: '?'
-    prob_type: '?'
-    typ_intvl_size: '?'
-    scale_fact_1st_size: 0
-    scale_val_1st_size: 0
-    scale_fact_2nd_size: 0
-    scale_val_2nd_size: 0
-    typ_intvl_wvlen: '?'
-    scale_fact_1st_wvlen: 0
-    scale_val_1st_wvlen: 0
-    scale_fact_2nd_wvlen: 0
-    scale_val_2nd_wvlen: 0
-    scale_fact_lower_limit: 0
-    scale_val_lower_limit: 0
-    scale_fact_upper_limit: 0
-    scale_val_upper_limit: 0
-    scale: [-4]
-    stat_miss_val: 0
-    leng_time_range_prev: 0
-    time_inc_betwn_succ_fld: 0
-    type_of_time_inc: '?'
-    stat_unit_time_key_succ: '?'
-    bit_map_flag: '?'
   - post_avblfldidx: 1004
     shortname: ACM_SNOWFALL_ON_SURFACE
     longname: '?'
     mass_windpoint: 1
     pdstmpl: tmpl4_8
     pname: TSNOWP
-    table_info: '?'
-    stats_proc: ACM
-    fixed_sfc1_type: surface
-    scale_fact_fixed_sfc1: ['?']
-    level: ['?']
-    fixed_sfc2_type: '?'
-    scale_fact_fixed_sfc2: ['?']
-    level2: ['?']
-    aerosol_type: '?'
-    prob_type: '?'
-    typ_intvl_size: '?'
-    scale_fact_1st_size: 0
-    scale_val_1st_size: 0
-    scale_fact_2nd_size: 0
-    scale_val_2nd_size: 0
-    typ_intvl_wvlen: '?'
-    scale_fact_1st_wvlen: 0
-    scale_val_1st_wvlen: 0
-    scale_fact_2nd_wvlen: 0
-    scale_val_2nd_wvlen: 0
-    scale_fact_lower_limit: 0
-    scale_val_lower_limit: 0
-    scale_fact_upper_limit: 0
-    scale_val_upper_limit: 0
-    scale: [4]
-    stat_miss_val: 0
-    leng_time_range_prev: 0
-    time_inc_betwn_succ_fld: 0
-    type_of_time_inc: '?'
-    stat_unit_time_key_succ: '?'
-    bit_map_flag: '?'
-  - post_avblfldidx: 121
-    shortname: ACM_SNOM_ON_SURFACE
-    longname: '?'
-    mass_windpoint: 1
-    pdstmpl: tmpl4_8
-    pname: SNOM
     table_info: '?'
     stats_proc: ACM
     fixed_sfc1_type: surface

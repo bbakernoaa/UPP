@@ -1,156 +1,199 @@
-#include "yaml_reader.h"
 #include <fkYAML/node.hpp>
 #include <fstream>
-#include <string>
-#include <vector>
-#include <cstring>
 #include <iostream>
-#include <algorithm>
+#include <vector>
+#include <string>
+#include <cstring>
+#include "yaml_reader.h"
 
 static fkyaml::node root_node;
-static bool is_loaded = false;
 
 extern "C" {
 
 int yaml_load_file(const char* filename) {
     try {
         std::ifstream ifs(filename);
-        if (!ifs.is_open()) {
-            return -1;
-        }
+        if (!ifs) return -1;
         root_node = fkyaml::node::deserialize(ifs);
-        is_loaded = true;
         return 0;
     } catch (const std::exception& e) {
-        std::cerr << "Error loading YAML: " << e.what() << std::endl;
+        std::cerr << "YAML Load Error: " << e.what() << std::endl;
         return -2;
     }
 }
 
 void yaml_free() {
     root_node = fkyaml::node();
-    is_loaded = false;
 }
 
 int yaml_get_paramset_count() {
-    if (!is_loaded || !root_node.contains("paramset")) return 0;
-    return root_node["paramset"].size();
+    try {
+        if (root_node.contains("paramset") && root_node["paramset"].is_sequence()) {
+            return (int)root_node["paramset"].size();
+        }
+    } catch (...) {}
+    return 0;
 }
 
 int yaml_get_param_count(int pset_idx) {
-    if (!is_loaded || !root_node.contains("paramset")) return 0;
-    auto& pset = root_node["paramset"][pset_idx];
-    if (!pset.contains("param")) return 0;
-    return pset["param"].size();
-}
-
-static void copy_string(const std::string& val, char* out, int out_len) {
-    int len = std::min((int)val.length(), out_len - 1);
-    std::memcpy(out, val.c_str(), len);
-    out[len] = '\0';
+    try {
+        auto& pset = root_node["paramset"][pset_idx];
+        if (pset.contains("param") && pset["param"].is_sequence()) {
+            return (int)pset["param"].size();
+        }
+    } catch (...) {}
+    return 0;
 }
 
 void yaml_get_paramset_string(int pset_idx, const char* key, char* out, int out_len) {
-    if (!is_loaded) return;
+    std::string val = "";
     try {
         auto& pset = root_node["paramset"][pset_idx];
         if (pset.contains(key)) {
-            std::string val = pset[key].get_value<std::string>();
-            copy_string(val, out, out_len);
-        } else {
-            copy_string("?", out, out_len);
+            if (pset[key].is_string()) {
+                val = pset[key].get_value<std::string>();
+            } else if (pset[key].is_integer()) {
+                val = std::to_string(pset[key].get_value<long>());
+            } else if (pset[key].is_float()) {
+                val = std::to_string(pset[key].get_value<double>());
+            }
         }
-    } catch (...) {
-        copy_string("?", out, out_len);
-    }
+    } catch (...) {}
+
+    std::strncpy(out, val.c_str(), out_len - 1);
+    out[std::min((int)val.length(), out_len - 1)] = '\0';
 }
 
 int yaml_get_paramset_int(int pset_idx, const char* key, int default_val) {
-    if (!is_loaded) return default_val;
     try {
         auto& pset = root_node["paramset"][pset_idx];
         if (pset.contains(key)) {
-            return pset[key].get_value<int>();
+            if (pset[key].is_integer()) {
+                return (int)pset[key].get_value<long>();
+            } else if (pset[key].is_string()) {
+                std::string s = pset[key].get_value<std::string>();
+                if (s == "?") return default_val;
+                return std::stoi(s);
+            }
         }
     } catch (...) {}
     return default_val;
 }
 
 void yaml_get_param_string(int pset_idx, int param_idx, const char* key, char* out, int out_len) {
-    if (!is_loaded) return;
+    std::string val = "";
     try {
-        auto& pset = root_node["paramset"][pset_idx];
-        auto& param = pset["param"][param_idx];
+        auto& param = root_node["paramset"][pset_idx]["param"][param_idx];
         if (param.contains(key)) {
-            std::string val = param[key].get_value<std::string>();
-            copy_string(val, out, out_len);
-        } else {
-            copy_string("?", out, out_len);
+            if (param[key].is_string()) {
+                val = param[key].get_value<std::string>();
+            } else if (param[key].is_integer()) {
+                val = std::to_string(param[key].get_value<long>());
+            } else if (param[key].is_float()) {
+                val = std::to_string(param[key].get_value<double>());
+            }
         }
-    } catch (...) {
-        copy_string("?", out, out_len);
-    }
+    } catch (...) {}
+
+    std::strncpy(out, val.c_str(), out_len - 1);
+    out[std::min((int)val.length(), out_len - 1)] = '\0';
 }
 
 int yaml_get_param_int(int pset_idx, int param_idx, const char* key, int default_val) {
-    if (!is_loaded) return default_val;
     try {
-        auto& pset = root_node["paramset"][pset_idx];
-        auto& param = pset["param"][param_idx];
+        auto& param = root_node["paramset"][pset_idx]["param"][param_idx];
         if (param.contains(key)) {
-            return param[key].get_value<int>();
+            if (param[key].is_integer()) {
+                return (int)param[key].get_value<long>();
+            } else if (param[key].is_string()) {
+                std::string s = param[key].get_value<std::string>();
+                if (s == "?") return default_val;
+                return std::stoi(s);
+            }
         }
     } catch (...) {}
     return default_val;
 }
 
 double yaml_get_param_double(int pset_idx, int param_idx, const char* key, double default_val) {
-    if (!is_loaded) return default_val;
     try {
-        auto& pset = root_node["paramset"][pset_idx];
-        auto& param = pset["param"][param_idx];
+        auto& param = root_node["paramset"][pset_idx]["param"][param_idx];
         if (param.contains(key)) {
-            return param[key].get_value<double>();
+            if (param[key].is_float()) {
+                return param[key].get_value<double>();
+            } else if (param[key].is_integer()) {
+                return (double)param[key].get_value<long>();
+            } else if (param[key].is_string()) {
+                std::string s = param[key].get_value<std::string>();
+                if (s == "?") return default_val;
+                return std::stod(s);
+            }
         }
     } catch (...) {}
     return default_val;
 }
 
 int yaml_get_param_array_size(int pset_idx, int param_idx, const char* key) {
-    if (!is_loaded) return 0;
     try {
-        auto& pset = root_node["paramset"][pset_idx];
-        auto& param = pset["param"][param_idx];
-        if (param.contains(key) && param[key].is_sequence()) {
-            return param[key].size();
+        auto& param = root_node["paramset"][pset_idx]["param"][param_idx];
+        if (param.contains(key)) {
+            if (param[key].is_sequence()) {
+                return (int)param[key].size();
+            } else {
+                return 1;
+            }
         }
     } catch (...) {}
     return 0;
 }
 
 void yaml_get_param_array_float(int pset_idx, int param_idx, const char* key, float* out, int out_len) {
-    if (!is_loaded) return;
     try {
-        auto& pset = root_node["paramset"][pset_idx];
-        auto& param = pset["param"][param_idx];
-        if (param.contains(key) && param[key].is_sequence()) {
-            int n = param[key].size();
-            for (int i = 0; i < n && i < out_len; ++i) {
-                out[i] = (float)param[key][i].get_value<double>();
+        auto& param = root_node["paramset"][pset_idx]["param"][param_idx];
+        if (param.contains(key)) {
+            if (param[key].is_sequence()) {
+                for (int i = 0; i < out_len && i < (int)param[key].size(); ++i) {
+                    if (param[key][i].is_float()) out[i] = (float)param[key][i].get_value<double>();
+                    else if (param[key][i].is_integer()) out[i] = (float)param[key][i].get_value<long>();
+                    else if (param[key][i].is_string()) {
+                        std::string s = param[key][i].get_value<std::string>();
+                        if (s == "?") out[i] = 0.0f;
+                        else out[i] = std::stof(s);
+                    }
+                }
+            } else {
+                if (param[key].is_float()) out[0] = (float)param[key].get_value<double>();
+                else if (param[key].is_integer()) out[0] = (float)param[key].get_value<long>();
+                else if (param[key].is_string()) {
+                    std::string s = param[key].get_value<std::string>();
+                    if (s == "?") out[0] = 0.0f;
+                    else out[0] = std::stof(s);
+                }
             }
         }
     } catch (...) {}
 }
 
 void yaml_get_param_array_int(int pset_idx, int param_idx, const char* key, int* out, int out_len) {
-    if (!is_loaded) return;
     try {
-        auto& pset = root_node["paramset"][pset_idx];
-        auto& param = pset["param"][param_idx];
-        if (param.contains(key) && param[key].is_sequence()) {
-            int n = param[key].size();
-            for (int i = 0; i < n && i < out_len; ++i) {
-                out[i] = param[key][i].get_value<int>();
+        auto& param = root_node["paramset"][pset_idx]["param"][param_idx];
+        if (param.contains(key)) {
+            if (param[key].is_sequence()) {
+                for (int i = 0; i < out_len && i < (int)param[key].size(); ++i) {
+                    if (param[key][i].is_integer()) out[i] = (int)param[key][i].get_value<long>();
+                    else if (param[key][i].is_string()) {
+                        std::string s = param[key][i].get_value<std::string>();
+                        if (s == "?") out[i] = 0;
+                        else out[i] = std::stoi(s);
+                    }
+                }
+            } else {
+                if (param[key].is_integer()) out[0] = (int)param[key].get_value<long>();
+                else if (param[key].is_string()) {
+                    std::string s = param[key].get_value<std::string>();
+                    if (s == "?") out[0] = 0;
+                    else out[0] = std::stoi(s);
+                }
             }
         }
     } catch (...) {}

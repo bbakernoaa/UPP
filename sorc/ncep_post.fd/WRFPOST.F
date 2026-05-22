@@ -209,7 +209,7 @@
        SUBMODELNAME='NONE'
        earth_radius=0.
 !Set control file name
-       fileNameFlat='postxconfig-NT.txt'
+       fileNameFlat='postxconfig-NT.yaml'
        numx=1
 !open namelist
        open(5,file='itag')

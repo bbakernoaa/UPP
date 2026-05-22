@@ -1,0 +1,144 @@
+paramset:
+- datset: IFIFIP
+  grid_num: 4
+  sub_center: ncep_emc
+  version_no: v2003
+  local_table_vers_no: local_tab_yes1
+  sigreftime: fcst
+  prod_status: oper
+  data_type: fcst
+  gen_proc_type: fcst
+  time_range_unit: hour
+  orig_center: nws_ncep
+  gen_proc: rrfs
+  packing_method: complex_packing_spatial_diff
+  order_of_sptdiff: 2nd_ord_sptdiff
+  field_datatype: fltng_pnt
+  comprs_type: lossless
+  param:
+  - post_avblfldidx: 1007
+    shortname: ICE_PROB_IFI_FLIGHT_LEVEL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: ICPRB
+    table_info: NCEP
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: [1]
+    level: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000,
+      60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000, 105000, 110000,
+      115000, 120000, 125000, 130000, 135000, 140000, 145000, 150000, 155000, 160000,
+      165000, 170000, 175000, 180000, 185000, 190000, 195000, 200000, 205000, 210000,
+      215000, 220000, 225000, 230000, 235000, 240000, 245000, 250000, 255000, 260000,
+      265000, 270000, 275000, 280000, 285000, 290000, 295000, 300000]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [4]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 1008
+    shortname: SLD_IFI_FLIGHT_LEVEL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: SIPD
+    table_info: NCEP
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: [1]
+    level: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000,
+      60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000, 105000, 110000,
+      115000, 120000, 125000, 130000, 135000, 140000, 145000, 150000, 155000, 160000,
+      165000, 170000, 175000, 180000, 185000, 190000, 195000, 200000, 205000, 210000,
+      215000, 220000, 225000, 230000, 235000, 240000, 245000, 250000, 255000, 260000,
+      265000, 270000, 275000, 280000, 285000, 290000, 295000, 300000]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [4]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 1010
+    shortname: WMO_ICE_SEV_CAT_IFI_FLIGHT_LEVEL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: ICESEV
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: [1]
+    level: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000,
+      60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000, 105000, 110000,
+      115000, 120000, 125000, 130000, 135000, 140000, 145000, 150000, 155000, 160000,
+      165000, 170000, 175000, 180000, 185000, 190000, 195000, 200000, 205000, 210000,
+      215000, 220000, 225000, 230000, 235000, 240000, 245000, 250000, 255000, 260000,
+      265000, 270000, 275000, 280000, 285000, 290000, 295000, 300000]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [4]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'

@@ -274,6 +274,7 @@
 
           if(allocated(lvlsxml)) deallocate(lvlsxml)
           allocate(lvlsxml(MXLVL,num_post_afld))
+          lvlsxml = 0.0
 
           k = 0
           do i = 1, paramset_count
@@ -306,6 +307,7 @@
 
             param_count = size(paramset(i)%param)
             do j = 1, param_count
+              k = k + 1
               paramset(i)%param(j)%post_avblfldidx = yaml_get_param_int(i-1, j-1, "post_avblfldidx"//c_null_char, -9999)
               call get_yaml_string(i-1, j-1, "shortname", paramset(i)%param(j)%shortname)
               call get_yaml_string(i-1, j-1, "longname", paramset(i)%param(j)%longname)
@@ -330,6 +332,9 @@
               if (level_array_count > 0) then
                 allocate(paramset(i)%param(j)%level(level_array_count))
                 call get_yaml_array_real(i-1, j-1, "level", paramset(i)%param(j)%level, level_array_count)
+                if (level_array_count <= MXLVL) then
+                   lvlsxml(1:level_array_count, k) = paramset(i)%param(j)%level(1:level_array_count)
+                endif
               else
                 allocate(paramset(i)%param(j)%level(1))
                 paramset(i)%param(j)%level(1) = 0.0
@@ -388,8 +393,8 @@
               call get_yaml_string(i-1, j-1, "stat_unit_time_key_succ", paramset(i)%param(j)%stat_unit_time_key_succ)
               call get_yaml_string(i-1, j-1, "bit_map_flag", paramset(i)%param(j)%bit_map_flag)
             enddo
-            post_avblflds%param => paramset(i)%param
           enddo
+          post_avblflds%param => paramset(1)%param
           call yaml_free()
           return
         endif
