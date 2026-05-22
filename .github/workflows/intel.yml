@@ -112,4 +112,5 @@ jobs:
           mkdir -p build && cd build
           cmake -DENABLE_DOCS=ON -DCMAKE_INSTALL_PREFIX=../install ..
           make -j2 VERBOSE=1
+          ctest --output-on-failure
           make install
