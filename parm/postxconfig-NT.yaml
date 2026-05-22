@@ -1,0 +1,44 @@
+paramset:
+  - datset: "GFSPRS"
+    grid_num: 0
+    sub_center: "ncep_nco"
+    version_no: "v2003"
+    local_table_vers_no: "local_tab_yes1"
+    sigreftime: "fcst"
+    prod_status: "oper"
+    data_type: "fcst"
+    gen_proc_type: "fcst"
+    time_range_unit: "hour"
+    orig_center: "nws_ncep"
+    gen_proc: "gfs_avn"
+    packing_method: "complex_packing_spatial_diff"
+    order_of_sptdiff: "2nd_ord_sptdiff"
+    field_datatype: "fltng_pnt"
+    comprs_type: "lossless"
+    param:
+      - shortname: "HGT_ON_ISOBARIC_SFC"
+        post_avblfldidx: 1
+        longname: "Geopotential height"
+        mass_windpoint: 1
+        pdstmpl: "tmpl4_0"
+        pname: "HGT"
+        table_info: "0"
+        stats_proc: "0"
+        fixed_sfc1_type: "isobaric_sfc"
+        scale_fact_fixed_sfc1: [0]
+        level: [1000.0, 2000.0, 5000.0, 7000.0, 10000.0]
+        fixed_sfc2_type: "?"
+        scale_fact_fixed_sfc2: [0]
+        level2: [0.0]
+        scale: [6.0]
+        stat_miss_val: 0
+        leng_time_range_prev: 0
+        time_inc_betwn_succ_fld: 0
+        type_of_time_inc: "?"
+        stat_unit_time_key_succ: "?"
+        bit_map_flag: "?"
+      - shortname: "TMP_ON_ISOBARIC_SFC"
+        post_avblfldidx: 2
+        longname: "Temperature"
+        level: [1000.0, 2000.0, 5000.0, 7000.0, 10000.0]
+        scale: [4.0]

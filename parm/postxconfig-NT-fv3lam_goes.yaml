@@ -1,0 +1,816 @@
+paramset:
+- datset: BGGOES
+  grid_num: 32769
+  sub_center: ncep_nco
+  version_no: v2003
+  local_table_vers_no: local_tab_yes1
+  sigreftime: fcst
+  prod_status: oper
+  data_type: fcst
+  gen_proc_type: fcst
+  time_range_unit: hour
+  orig_center: nws_ncep
+  gen_proc: meso_nam12km
+  packing_method: complex_packing_spatial_diff
+  order_of_sptdiff: 2nd_ord_sptdiff
+  field_datatype: fltng_pnt
+  comprs_type: lossless
+  param:
+  - post_avblfldidx: 927
+    shortname: SBTA167_ON_TOP_OF_ATMOS
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: SBTA167
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: top_of_atmos
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '0'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: '0'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 1
+    scale_fact_lower_limit: 4
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: 928
+    type_of_time_inc: SBTA168_ON_TOP_OF_ATMOS
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '1'
+  - post_avblfldidx: 0
+    shortname: SBTA168
+    longname: '?'
+    mass_windpoint: 0
+    pdstmpl: top_of_atmos
+    pname: '0'
+    table_info: '?'
+    stats_proc: '0'
+    fixed_sfc1_type: '?'
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: '0'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '0'
+    typ_intvl_size: '0.0'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '0.0'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 1
+    scale_val_2nd_wvlen: 4
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: 929
+    time_inc_betwn_succ_fld: SBTA169_ON_TOP_OF_ATMOS
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '1'
+    bit_map_flag: tmpl4_0
+  - post_avblfldidx: 0
+    shortname: '?'
+    longname: '?'
+    mass_windpoint: 0
+    pdstmpl: '0'
+    pname: '?'
+    table_info: '0'
+    stats_proc: '?'
+    fixed_sfc1_type: '?'
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: [0]
+    aerosol_type: '0'
+    prob_type: '0.0'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '1'
+    scale_fact_1st_wvlen: 4
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: 930
+    scale: ['?']
+    stat_miss_val: 1
+    leng_time_range_prev: tmpl4_0
+    time_inc_betwn_succ_fld: SBTA1610
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: top_of_atmos
+  - post_avblfldidx: 0
+    shortname: '?'
+    longname: '0'
+    mass_windpoint: 0
+    pdstmpl: '?'
+    pname: '0'
+    table_info: '?'
+    stats_proc: '0'
+    fixed_sfc1_type: '?'
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: '0'
+    scale_fact_fixed_sfc2: [0]
+    level2: ['?']
+    aerosol_type: '0'
+    prob_type: '0.0'
+    typ_intvl_size: '0'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 1
+    scale_fact_2nd_size: 4
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '0'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: 931
+    scale_val_lower_limit: SBTA1611_ON_TOP_OF_ATMOS
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: 1
+    scale: [SBTA1611]
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: top_of_atmos
+    type_of_time_inc: '0'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '0'
+  - post_avblfldidx: 0
+    shortname: '?'
+    longname: '0'
+    mass_windpoint: 0
+    pdstmpl: '0'
+    pname: '?'
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: '0'
+    scale_fact_fixed_sfc1: [0]
+    level: ['?']
+    fixed_sfc2_type: '0'
+    scale_fact_fixed_sfc2: [0]
+    level2: [1]
+    aerosol_type: '4.0'
+    prob_type: '0'
+    typ_intvl_size: '0'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: '932'
+    scale_fact_1st_wvlen: SBTA1612_ON_TOP_OF_ATMOS
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: 1
+    scale_val_2nd_wvlen: tmpl4_0
+    scale_fact_lower_limit: SBTA1612
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: top_of_atmos
+    scale: ['?']
+    stat_miss_val: 0
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: '0'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '0'
+  - post_avblfldidx: 0
+    shortname: '?'
+    longname: '?'
+    mass_windpoint: 0
+    pdstmpl: '0.0'
+    pname: '0'
+    table_info: '0.0'
+    stats_proc: '?'
+    fixed_sfc1_type: '0'
+    scale_fact_fixed_sfc1: [0]
+    level: [1]
+    fixed_sfc2_type: '4.0'
+    scale_fact_fixed_sfc2: [0]
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '933'
+    scale_fact_1st_size: SBTA1613_ON_TOP_OF_ATMOS
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: 1
+    scale_val_2nd_size: tmpl4_0
+    typ_intvl_wvlen: SBTA1613
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: top_of_atmos
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: 0
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '0'
+    bit_map_flag: '0.0'
+  - post_avblfldidx: 0
+    shortname: '0.0'
+    longname: '?'
+    mass_windpoint: 0
+    pdstmpl: '0.0'
+    pname: '0'
+    table_info: '0.0'
+    stats_proc: '1'
+    fixed_sfc1_type: '4.0'
+    scale_fact_fixed_sfc1: [0]
+    level: ['?']
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: [SBTA1614_ON_TOP_OF_ATMOS, '?', 1, tmpl4_0, SBTA1614, '?', '?', top_of_atmos,
+      0, '?', 0, '?', '?', 0, '?', 0, '?', '?', '?', 0, 0, 0, 0, '?', 0, 0, 0, 0,
+      1, 4, 0, 0, 0, '?', '?', '?', 935, SBTA1615_ON_TOP_OF_ATMOS, '?', 1, tmpl4_0,
+      SBTA1615, '?', '?', top_of_atmos, 0, '?', 0, '?', '?', 0, '?', 0, '?', '?',
+      '?', 0, 0, 0, 0, '?', 0, 0, 0, 0, 1, 4, 0, 0, 0, '?', '?', '?', 936, SBTA1616_ON_TOP_OF_ATMOS,
+      '?', 1, tmpl4_0, SBTA1616, '?', '?', top_of_atmos, 0, '?', 0, '?', '?', 0, '?',
+      0, '?', '?', '?', 0, 0, 0, 0, '?', 0, 0, 0, 0, 1, 4, 0, 0, 0, '?', '?', '?',
+      937, SBTA177_ON_TOP_OF_ATMOS, '?', 1, tmpl4_0, SBTA177, '?', '?', top_of_atmos,
+      0, '?', 0, '?', '?', 0, '?', 0, '?', '?', '?', 0, 0, 0, 0, '?', 0, 0, 0, 0,
+      1, 4, 0, 0, 0, '?', '?', '?', 938, SBTA178_ON_TOP_OF_ATMOS, '?', 1, tmpl4_0,
+      SBTA178, '?', '?', top_of_atmos, 0, '?', 0, '?', '?', 0, '?', 0, '?', '?', '?',
+      0, 0, 0, 0, '?', 0, 0, 0, 0, 1, 4, 0, 0, 0, '?', '?', '?', 939, SBTA179_ON_TOP_OF_ATMOS,
+      '?', 1, tmpl4_0, SBTA179, '?', '?', top_of_atmos, 0, '?', 0, '?', '?', 0, '?',
+      0, '?', '?', '?', 0, 0, 0, 0, '?', 0, 0, 0, 0, 1, 4, 0, 0, 0, '?', '?', '?',
+      940, SBTA1710_ON_TOP_OF_ATMOS, '?', 1, tmpl4_0, SBTA1710, '?', '?', top_of_atmos,
+      0, '?', 0, '?', '?', 0, '?', 0, '?', '?', '?', 0, 0, 0, 0, '?', 0, 0, 0, 0,
+      1, 4, 0, 0, 0, '?', '?', '?', 941, SBTA1711_ON_TOP_OF_ATMOS, '?', 1, tmpl4_0,
+      SBTA1711, '?', '?', top_of_atmos, 0, '?', 0, '?', '?', 0, '?', 0, '?', '?',
+      '?', 0, 0, 0, 0, '?', 0, 0, 0, 0, 1, 4, 0, 0, 0, '?', '?', '?', 942, SBTA1712_ON_TOP_OF_ATMOS,
+      '?', 1, tmpl4_0, SBTA1712, '?', '?', top_of_atmos, 0, '?', 0, '?', '?', 0, '?',
+      0, '?', '?', '?', 0, 0, 0, 0, '?', 0, 0, 0, 0, 1, 4, 0, 0, 0, '?', '?', '?',
+      943, SBTA1713_ON_TOP_OF_ATMOS, '?', 1, tmpl4_0, SBTA1713, '?', '?', top_of_atmos,
+      0, '?', 0, '?', '?', 0, '?', 0, '?', '?', '?', 0, 0, 0, 0, '?', 0, 0, 0, 0,
+      1, 4, 0, 0, 0, '?', '?', '?', 944, SBTA1714_ON_TOP_OF_ATMOS, '?', 1, tmpl4_0,
+      SBTA1714, '?', '?', top_of_atmos, 0, '?', 0, '?', '?', 0, '?', 0, '?', '?',
+      '?', 0, 0, 0, 0, '?', 0, 0, 0, 0, 1, 4, 0, 0, 0, '?', '?', '?', 945, SBTA1715_ON_TOP_OF_ATMOS,
+      '?', 1, tmpl4_0, SBTA1715, '?', '?', top_of_atmos, 0, '?', 0, '?', '?', 0, '?',
+      0, '?', '?', '?', 0, 0, 0, 0, '?', 0, 0, 0, 0, 1, 4, 0, 0, 0, '?', '?', '?',
+      946, SBTA1716_ON_TOP_OF_ATMOS, '?', 1, tmpl4_0, SBTA1716, '?', '?', top_of_atmos,
+      0, '?', 0, '?', '?', 0, '?', 0, '?', '?', '?', 0, 0, 0, 0, '?', 0, 0, 0, 0,
+      1, 4, 0, 0, 0, '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
+      '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null
+  - post_avblfldidx: 0
+    shortname: null
+    longname: ''
+    mass_windpoint: 0
+    pdstmpl: null
+    pname: null
+    table_info: null
+    stats_proc: null
+    fixed_sfc1_type: null
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: null
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: null
+    prob_type: null
+    typ_intvl_size: null
+    scale_fact_1st_size: '?'
+    scale_val_1st_size: '?'
+    scale_fact_2nd_size: '?'
+    scale_val_2nd_size: '?'
+    typ_intvl_wvlen: null
+    scale_fact_1st_wvlen: '?'
+    scale_val_1st_wvlen: '?'
+    scale_fact_2nd_wvlen: '?'
+    scale_val_2nd_wvlen: '?'
+    scale_fact_lower_limit: '?'
+    scale_val_lower_limit: '?'
+    scale_fact_upper_limit: '?'
+    scale_val_upper_limit: '?'
+    scale: ['?']
+    stat_miss_val: '?'
+    leng_time_range_prev: '?'
+    time_inc_betwn_succ_fld: '?'
+    type_of_time_inc: null
+    stat_unit_time_key_succ: null
+    bit_map_flag: null

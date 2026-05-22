@@ -1,0 +1,224 @@
+paramset:
+- datset: GFSPRS
+  grid_num: 0
+  sub_center: ncep_nco
+  version_no: v2003
+  local_table_vers_no: local_tab_yes1
+  sigreftime: fcst
+  prod_status: oper
+  data_type: fcst
+  gen_proc_type: fcst
+  time_range_unit: hour
+  orig_center: nws_ncep
+  gen_proc: gfs_avn
+  packing_method: complex_packing_spatial_diff
+  order_of_sptdiff: 2nd_ord_sptdiff
+  field_datatype: fltng_pnt
+  comprs_type: lossless
+  param:
+  - post_avblfldidx: 12
+    shortname: HGT_ON_ISOBARIC_SFC
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: HGT
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: isobaric_sfc
+    scale_fact_fixed_sfc1: ['?']
+    level: [7170, 7520, 7900, 8280, 8700, 9120, 9570, 10040, 10530, 11050, 11600,
+      12170, 12770, 13400, 14060, 14750, 15470, 16240, 17040, 17870, 18750, 19680,
+      20650, 21660, 22730, 23840, 25000, 26200, 27450, 28740, 30090, 31490, 32930,
+      34430, 35990, 37600, 39270, 41000, 42790, 44650, 46560, 48550, 50600, 52720,
+      54920, 57180, 59520, 61940, 64440, 67020, 69680, 72430, 75260, 78190, 81200,
+      84310]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [6]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 13
+    shortname: TMP_ON_ISOBARIC_SFC
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: TMP
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: isobaric_sfc
+    scale_fact_fixed_sfc1: ['?']
+    level: [7170, 7520, 7900, 8280, 8700, 9120, 9570, 10040, 10530, 11050, 11600,
+      12170, 12770, 13400, 14060, 14750, 15470, 16240, 17040, 17870, 18750, 19680,
+      20650, 21660, 22730, 23840, 25000, 26200, 27450, 28740, 30090, 31490, 32930,
+      34430, 35990, 37600, 39270, 41000, 42790, 44650, 46560, 48550, 50600, 52720,
+      54920, 57180, 59520, 61940, 64440, 67020, 69680, 72430, 75260, 78190, 81200,
+      84310]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [4]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 18
+    shortname: UGRD_ON_ISOBARIC_SFC
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: UGRD
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: isobaric_sfc
+    scale_fact_fixed_sfc1: ['?']
+    level: [7170, 7520, 7900, 8280, 8700, 9120, 9570, 10040, 10530, 11050, 11600,
+      12170, 12770, 13400, 14060, 14750, 15470, 16240, 17040, 17870, 18750, 19680,
+      20650, 21660, 22730, 23840, 25000, 26200, 27450, 28740, 30090, 31490, 32930,
+      34430, 35990, 37600, 39270, 41000, 42790, 44650, 46560, 48550, 50600, 52720,
+      54920, 57180, 59520, 61940, 64440, 67020, 69680, 72430, 75260, 78190, 81200,
+      84310]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [4]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 19
+    shortname: VGRD_ON_ISOBARIC_SFC
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: VGRD
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: isobaric_sfc
+    scale_fact_fixed_sfc1: ['?']
+    level: [7170, 7520, 7900, 8280, 8700, 9120, 9570, 10040, 10530, 11050, 11600,
+      12170, 12770, 13400, 14060, 14750, 15470, 16240, 17040, 17870, 18750, 19680,
+      20650, 21660, 22730, 23840, 25000, 26200, 27450, 28740, 30090, 31490, 32930,
+      34430, 35990, 37600, 39270, 41000, 42790, 44650, 46560, 48550, 50600, 52720,
+      54920, 57180, 59520, 61940, 64440, 67020, 69680, 72430, 75260, 78190, 81200,
+      84310]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [4]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 17
+    shortname: RH_ON_ISOBARIC_SFC
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: RH
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: isobaric_sfc
+    scale_fact_fixed_sfc1: ['?']
+    level: [50600, 52720, 54920, 57180, 59520, 61940, 64440, 67020, 69680, 72430,
+      75260, 78190, 81200, 84310]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [3]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'

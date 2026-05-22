@@ -1,0 +1,362 @@
+paramset:
+- datset: IFIFIP
+  grid_num: 4
+  sub_center: ncep_awc
+  version_no: v2003
+  local_table_vers_no: local_tab_yes1
+  sigreftime: fcst
+  prod_status: oper
+  data_type: fcst
+  gen_proc_type: fcst
+  time_range_unit: hour
+  orig_center: nws_ncep
+  gen_proc: hrrr
+  packing_method: complex_packing_spatial_diff
+  order_of_sptdiff: 2nd_ord_sptdiff
+  field_datatype: fltng_pnt
+  comprs_type: lossless
+  param:
+  - post_avblfldidx: 1007
+    shortname: ICE_PROB_IFI_FLIGHT_LEVEL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: ICPRB
+    table_info: NCEP
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: [1]
+    level: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000,
+      60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000, 105000, 110000,
+      115000, 120000, 125000, 130000, 135000, 140000, 145000, 150000, 155000, 160000,
+      165000, 170000, 175000, 180000, 185000, 190000, 195000, 200000, 205000, 210000,
+      215000, 220000, 225000, 230000, 235000, 240000, 245000, 250000, 255000, 260000,
+      265000, 270000, 275000, 280000, 285000, 290000, 295000, 300000]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [2]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 1008
+    shortname: SLD_IFI_FLIGHT_LEVEL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: SIPD
+    table_info: NCEP
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: [1]
+    level: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000,
+      60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000, 105000, 110000,
+      115000, 120000, 125000, 130000, 135000, 140000, 145000, 150000, 155000, 160000,
+      165000, 170000, 175000, 180000, 185000, 190000, 195000, 200000, 205000, 210000,
+      215000, 220000, 225000, 230000, 235000, 240000, 245000, 250000, 255000, 260000,
+      265000, 270000, 275000, 280000, 285000, 290000, 295000, 300000]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [2]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 1010
+    shortname: WMO_ICE_SEV_CAT_IFI_FLIGHT_LEVEL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: ICESEV
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: [1]
+    level: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000,
+      60000, 65000, 70000, 75000, 80000, 85000, 90000, 95000, 100000, 105000, 110000,
+      115000, 120000, 125000, 130000, 135000, 140000, 145000, 150000, 155000, 160000,
+      165000, 170000, 175000, 180000, 185000, 190000, 195000, 200000, 205000, 210000,
+      215000, 220000, 225000, 230000, 235000, 240000, 245000, 250000, 255000, 260000,
+      265000, 270000, 275000, 280000, 285000, 290000, 295000, 300000]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [1]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+- datset: AVIATION
+  grid_num: 4
+  sub_center: ncep_awc
+  version_no: v2003
+  local_table_vers_no: local_tab_yes1
+  sigreftime: fcst
+  prod_status: oper
+  data_type: fcst
+  gen_proc_type: fcst
+  time_range_unit: hour
+  orig_center: nws_ncep
+  gen_proc: hrrr
+  packing_method: complex_packing_spatial_diff
+  order_of_sptdiff: 2nd_ord_sptdiff
+  field_datatype: fltng_pnt
+  comprs_type: lossless
+  param:
+  - post_avblfldidx: 476
+    shortname: MXEDPRM_ON_ENTIRE_ATMOS
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: MXEDPRM
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: entire_atmos
+    scale_fact_fixed_sfc1: ['?']
+    level: ['?']
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [3]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 467
+    shortname: EDPARM_GTG_ON_SPEC_ALT_ABOVE_MEAN_SEA_LVL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: EDPARM
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: ['?']
+    level: [30, 304, 609, 914, 1219, 1524, 1828, 2133, 2438, 2743, 3048, 3352, 3657,
+      3962, 4267, 4572, 4876, 5181, 5486, 5791, 6096, 6400, 6705, 7010, 7315, 7620,
+      7924, 8229, 8534, 8839, 9144, 9448, 9753, 10058, 10363, 10668, 10972, 11277,
+      11582, 11887, 12192, 12496, 12801, 13106, 13411, 13716, 14020, 14325, 14630,
+      14935, 15240]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [3]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 468
+    shortname: CAT_GTG_ON_SPEC_ALT_ABOVE_MEAN_SEA_LVL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: CATEDR
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: ['?']
+    level: [30, 304, 609, 914, 1219, 1524, 1828, 2133, 2438, 2743, 3048, 3352, 3657,
+      3962, 4267, 4572, 4876, 5181, 5486, 5791, 6096, 6400, 6705, 7010, 7315, 7620,
+      7924, 8229, 8534, 8839, 9144, 9448, 9753, 10058, 10363, 10668, 10972, 11277,
+      11582, 11887, 12192, 12496, 12801, 13106, 13411, 13716, 14020, 14325, 14630,
+      14935, 15240]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [3]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 469
+    shortname: MWTURB_GTG_ON_SPEC_ALT_ABOVE_MEAN_SEA_LVL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: MWTURB
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: ['?']
+    level: [30, 304, 609, 914, 1219, 1524, 1828, 2133, 2438, 2743, 3048, 3352, 3657,
+      3962, 4267, 4572, 4876, 5181, 5486, 5791, 6096, 6400, 6705, 7010, 7315, 7620,
+      7924, 8229, 8534, 8839, 9144, 9448, 9753, 10058, 10363, 10668, 10972, 11277,
+      11582, 11887, 12192, 12496, 12801, 13106, 13411, 13716, 14020, 14325, 14630,
+      14935, 15240]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [3]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'
+  - post_avblfldidx: 477
+    shortname: CIT_GTG_ON_SPEC_ALT_ABOVE_MEAN_SEA_LVL
+    longname: '?'
+    mass_windpoint: 1
+    pdstmpl: tmpl4_0
+    pname: CITEDR
+    table_info: '?'
+    stats_proc: '?'
+    fixed_sfc1_type: spec_alt_above_mean_sea_lvl
+    scale_fact_fixed_sfc1: ['?']
+    level: [30, 304, 609, 914, 1219, 1524, 1828, 2133, 2438, 2743, 3048, 3352, 3657,
+      3962, 4267, 4572, 4876, 5181, 5486, 5791, 6096, 6400, 6705, 7010, 7315, 7620,
+      7924, 8229, 8534, 8839, 9144, 9448, 9753, 10058, 10363, 10668, 10972, 11277,
+      11582, 11887, 12192, 12496, 12801, 13106, 13411, 13716, 14020, 14325, 14630,
+      14935, 15240]
+    fixed_sfc2_type: '?'
+    scale_fact_fixed_sfc2: ['?']
+    level2: ['?']
+    aerosol_type: '?'
+    prob_type: '?'
+    typ_intvl_size: '?'
+    scale_fact_1st_size: 0
+    scale_val_1st_size: 0
+    scale_fact_2nd_size: 0
+    scale_val_2nd_size: 0
+    typ_intvl_wvlen: '?'
+    scale_fact_1st_wvlen: 0
+    scale_val_1st_wvlen: 0
+    scale_fact_2nd_wvlen: 0
+    scale_val_2nd_wvlen: 0
+    scale_fact_lower_limit: 0
+    scale_val_lower_limit: 0
+    scale_fact_upper_limit: 0
+    scale_val_upper_limit: 0
+    scale: [3]
+    stat_miss_val: 0
+    leng_time_range_prev: 0
+    time_inc_betwn_succ_fld: 0
+    type_of_time_inc: '?'
+    stat_unit_time_key_succ: '?'
+    bit_map_flag: '?'

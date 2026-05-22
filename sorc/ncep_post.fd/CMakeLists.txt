@@ -125,7 +125,8 @@ list(APPEND LIB_SRC
     WETBULB.f
     WETFRZLVL.f
     xml_perl_data.f
-    ZENSUN.f)
+    ZENSUN.f
+    yaml_reader.cpp)
 
 list(APPEND GTG_LIB_SRC
   gtg_algo.F90
@@ -210,7 +211,8 @@ set_target_properties(${LIBNAME} PROPERTIES Fortran_MODULE_DIRECTORY
 
 target_include_directories(${LIBNAME} PUBLIC
   $<BUILD_INTERFACE:${module_dir}>
-  $<INSTALL_INTERFACE:include>)
+  $<INSTALL_INTERFACE:include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../fkyaml/include>)
 
 target_link_libraries(${LIBNAME} PUBLIC
   bacio::bacio_4
