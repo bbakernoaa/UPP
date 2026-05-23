@@ -9,12 +9,12 @@ defaults:
 
 # Set I_MPI_CC/F90 so Intel MPI wrapper uses icc/ifort instead of gcc/gfortran
 env:
-  cache_key: intel7  # The number (#) following the cache_key "intel" is to flush Action cache.
-  CC: icx
-  FC: ifx
-  CXX: icpx
-  I_MPI_CC: icx
-  I_MPI_F90: ifx
+  cache_key: intel8  # The number (#) following the cache_key "intel" is to flush Action cache.
+  CC: icc
+  FC: ifort
+  CXX: icpc
+  I_MPI_CC: icc
+  I_MPI_F90: ifort
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 # A note on flushing Action cache and relevance to "cache_key" above.
@@ -67,7 +67,7 @@ jobs:
       - name: install-dependencies-with-spack
         if: steps.cache-env.outputs.cache-hit != 'true'
         run: |
-          git clone --depth 1 -b releases/v0.23 https://github.com/spack/spack.git
+          git clone --depth 1 -b releases/v0.22 https://github.com/spack/spack.git
           source spack/share/spack/setup-env.sh
           spack env create upp-env UPP/ci/spack.yaml
           spack env activate upp-env
@@ -107,8 +107,8 @@ jobs:
         run: |
           source spack/share/spack/setup-env.sh
           spack env activate upp-env
-          export CC=mpiicx
-          export FC=mpiifx
+          export CC=mpiicc
+          export FC=mpiifort
           cd UPP
           mkdir -p build && cd build
           cmake -DENABLE_DOCS=ON -DCMAKE_INSTALL_PREFIX=../install ..

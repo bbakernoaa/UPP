@@ -9,7 +9,7 @@ defaults:
     shell: bash -leo pipefail {0}
 
 env:
-  cache_key: gcc7  # The number (#) following the cache_key "gcc" is to flush Action cache.
+  cache_key: gcc8  # The number (#) following the cache_key "gcc" is to flush Action cache.
   CC: gcc-10
   FC: gfortran-10
   CXX: g++-10
@@ -54,10 +54,11 @@ jobs:
       - name: install-dependencies-with-spack
         if: steps.cache-env.outputs.cache-hit != 'true'
         run: |
-          git clone --depth 1 -b releases/v0.23 https://github.com/spack/spack.git
+          git clone --depth 1 -b releases/v0.22 https://github.com/spack/spack.git
           source spack/share/spack/setup-env.sh
           spack env create upp-env UPP/ci/spack.yaml
           spack env activate upp-env
+          spack compiler find
           sudo apt install cmake
           spack external find
           spack add mpich@3.4.2

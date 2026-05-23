@@ -3,7 +3,7 @@ spack:
   packages:
     all:
       compiler:
-      - oneapi
+      - intel
       - gcc@10:10
   specs:
   - netcdf-c@4.9.2
@@ -17,8 +17,8 @@ spack:
   - nemsio@2.5.4
   - wrf-io@1.2.0
   - crtm@2.4.0.1
-  - eckit
+  - eckit@1.24.4
   view: true
   concretizer:
-    unify: true
+    unify: when_possible
 
