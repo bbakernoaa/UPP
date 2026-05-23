@@ -9,12 +9,12 @@ defaults:
 
 # Set I_MPI_CC/F90 so Intel MPI wrapper uses icc/ifort instead of gcc/gfortran
 env:
-  cache_key: intel11  # The number (#) following the cache_key "intel" is to flush Action cache.
-  CC: icx
-  FC: ifx
-  CXX: icpx
-  I_MPI_CC: icx
-  I_MPI_F90: ifx
+  cache_key: intel12  # The number (#) following the cache_key "intel" is to flush Action cache.
+  CC: icc
+  FC: ifort
+  CXX: icpc
+  I_MPI_CC: icc
+  I_MPI_F90: ifort
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 # A note on flushing Action cache and relevance to "cache_key" above.
@@ -67,15 +67,15 @@ jobs:
       - name: install-dependencies-with-spack
         if: steps.cache-env.outputs.cache-hit != 'true'
         run: |
-          git clone --depth 1 -b 1.9.3 --recurse-submodules https://github.com/JCSDA/spack-stack.git
-          cd spack-stack
-          source setup.sh
-          spack stack create env --site linux.default --template ufs-weather-model --name upp-env --compiler oneapi
+          git clone -c feature.manyFiles=true https://github.com/NOAA-EMC/spack.git
+          cd spack
+          ./REMOVE_SPACK_STACK_MODS_FOR_CI.sh
+          source share/spack/setup-env.sh
+          spack env create upp-env ../UPP/ci/spack.yaml
           spack env activate upp-env
           spack compiler find
           sudo apt install cmake
-          spack external find --scope system
-          spack add eckit@1.24.4
+          spack external find
           spack add intel-oneapi-mpi
           spack concretize
           spack install --dirty -v --fail-fast
@@ -108,10 +108,10 @@ jobs:
       # Build UPP
       - name: build-upp
         run: |
-          source spack-stack/setup.sh
+          source spack/share/spack/setup-env.sh
           spack env activate upp-env
-          export CC=mpiicx
-          export FC=mpiifx
+          export CC=mpiicc
+          export FC=mpiifort
           cd UPP
           mkdir -p build && cd build
           cmake -DENABLE_DOCS=ON -DCMAKE_INSTALL_PREFIX=../install ..

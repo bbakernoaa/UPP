@@ -3,7 +3,7 @@ spack:
   packages:
     all:
       compiler:
-      - oneapi
+      - intel
       - gcc@10:10
   specs:
   - netcdf-c@4.9.2

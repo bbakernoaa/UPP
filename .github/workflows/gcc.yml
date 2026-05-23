@@ -9,7 +9,7 @@ defaults:
     shell: bash -leo pipefail {0}
 
 env:
-  cache_key: gcc11  # The number (#) following the cache_key "gcc" is to flush Action cache.
+  cache_key: gcc12  # The number (#) following the cache_key "gcc" is to flush Action cache.
   CC: gcc-10
   FC: gfortran-10
   CXX: g++-10
@@ -54,15 +54,14 @@ jobs:
       - name: install-dependencies-with-spack
         if: steps.cache-env.outputs.cache-hit != 'true'
         run: |
-          git clone --depth 1 -b 1.9.3 --recurse-submodules https://github.com/JCSDA/spack-stack.git
-          cd spack-stack
-          source setup.sh
-          spack stack create env --site linux.default --template ufs-weather-model --name upp-env --compiler gcc@10
+          git clone -c feature.manyFiles=true https://github.com/NOAA-EMC/spack.git
+          cd spack
+          ./REMOVE_SPACK_STACK_MODS_FOR_CI.sh
+          source share/spack/setup-env.sh
+          spack env create upp-env ../UPP/ci/spack.yaml
           spack env activate upp-env
-          spack compiler find
           sudo apt install cmake
-          spack external find --scope system
-          spack add eckit@1.24.4
+          spack external find
           spack add mpich@3.4.2
           spack add doxygen
           spack concretize
@@ -90,7 +89,7 @@ jobs:
 
       - name: build-upp
         run: |
-          source spack-stack/setup.sh
+          source spack/share/spack/setup-env.sh
           spack env activate upp-env
           export CC=mpicc
           export FC=mpif90
