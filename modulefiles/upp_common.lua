@@ -18,6 +18,7 @@ local ufs_modules = {
   {["nemsio"]          = "2.5.4"  },
   {["sigio"]           = "2.3.3"  },
   {["wrf-io"]          = "1.2.0"  },
+  {["eckit"]           = "1.24.4" },
 }
 
 for i = 1, #ufs_modules do
