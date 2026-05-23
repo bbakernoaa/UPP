@@ -9,7 +9,7 @@ defaults:
 
 # Set I_MPI_CC/F90 so Intel MPI wrapper uses icc/ifort instead of gcc/gfortran
 env:
-  cache_key: intel10  # The number (#) following the cache_key "intel" is to flush Action cache.
+  cache_key: intel11  # The number (#) following the cache_key "intel" is to flush Action cache.
   CC: icx
   FC: ifx
   CXX: icpx
@@ -70,7 +70,7 @@ jobs:
           git clone --depth 1 -b 1.9.3 --recurse-submodules https://github.com/JCSDA/spack-stack.git
           cd spack-stack
           source setup.sh
-          spack stack create env --site linux.default --template ufs-weather-model --name upp-env
+          spack stack create env --site linux.default --template ufs-weather-model --name upp-env --compiler oneapi
           spack env activate upp-env
           spack compiler find
           sudo apt install cmake

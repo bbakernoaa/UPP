@@ -9,7 +9,7 @@ defaults:
     shell: bash -leo pipefail {0}
 
 env:
-  cache_key: gcc10  # The number (#) following the cache_key "gcc" is to flush Action cache.
+  cache_key: gcc11  # The number (#) following the cache_key "gcc" is to flush Action cache.
   CC: gcc-10
   FC: gfortran-10
   CXX: g++-10
@@ -57,7 +57,7 @@ jobs:
           git clone --depth 1 -b 1.9.3 --recurse-submodules https://github.com/JCSDA/spack-stack.git
           cd spack-stack
           source setup.sh
-          spack stack create env --site linux.default --template ufs-weather-model --name upp-env
+          spack stack create env --site linux.default --template ufs-weather-model --name upp-env --compiler gcc@10
           spack env activate upp-env
           spack compiler find
           sudo apt install cmake
