@@ -211,8 +211,7 @@ set_target_properties(${LIBNAME} PROPERTIES Fortran_MODULE_DIRECTORY
 
 target_include_directories(${LIBNAME} PUBLIC
   $<BUILD_INTERFACE:${module_dir}>
-  $<INSTALL_INTERFACE:include>
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../fkyaml/include>)
+  $<INSTALL_INTERFACE:include>)
 
 target_link_libraries(${LIBNAME} PUBLIC
   bacio::bacio_4
@@ -220,7 +219,8 @@ target_link_libraries(${LIBNAME} PUBLIC
   g2::g2_4
   g2tmpl::g2tmpl
   MPI::MPI_Fortran
-  NetCDF::NetCDF_Fortran)
+  NetCDF::NetCDF_Fortran
+  eckit)
 
 if(IFI_FOUND)
   if(INTERNAL_IFI)

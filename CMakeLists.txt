@@ -37,6 +37,7 @@ endif()
 
 find_package(MPI REQUIRED)
 find_package(NetCDF REQUIRED COMPONENTS Fortran)
+find_package(eckit REQUIRED)
 
 if(OPENMP)
   find_package(OpenMP REQUIRED COMPONENTS Fortran)
