@@ -9,7 +9,7 @@ defaults:
 
 # Set I_MPI_CC/F90 so Intel MPI wrapper uses icc/ifort instead of gcc/gfortran
 env:
-  cache_key: intel12  # The number (#) following the cache_key "intel" is to flush Action cache.
+  cache_key: intel13  # The number (#) following the cache_key "intel" is to flush Action cache.
   CC: icc
   FC: ifort
   CXX: icpc
@@ -74,7 +74,7 @@ jobs:
           spack env create upp-env ../UPP/ci/spack.yaml
           spack env activate upp-env
           spack compiler find
-          sudo apt install cmake
+          sudo apt install cmake doxygen
           spack external find
           spack add intel-oneapi-mpi
           spack concretize

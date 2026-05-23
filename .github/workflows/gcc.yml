@@ -9,7 +9,7 @@ defaults:
     shell: bash -leo pipefail {0}
 
 env:
-  cache_key: gcc12  # The number (#) following the cache_key "gcc" is to flush Action cache.
+  cache_key: gcc13  # The number (#) following the cache_key "gcc" is to flush Action cache.
   CC: gcc-10
   FC: gfortran-10
   CXX: g++-10
@@ -60,10 +60,9 @@ jobs:
           source share/spack/setup-env.sh
           spack env create upp-env ../UPP/ci/spack.yaml
           spack env activate upp-env
-          sudo apt install cmake
+          sudo apt install cmake doxygen
           spack external find
           spack add mpich@3.4.2
-          spack add doxygen
           spack concretize
           spack install -v --fail-fast --dirty
           spack clean --all
