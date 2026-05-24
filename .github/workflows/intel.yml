@@ -65,11 +65,12 @@ jobs:
           spack env activate upp-env
           source /opt/intel/oneapi/setvars.sh --force
           spack compiler find
-          sudo apt install cmake doxygen
+          sudo apt-get update
+          sudo apt-get install -y cmake doxygen
           spack external find
           spack add intel-oneapi-mpi
           spack concretize
-          spack install --dirty -v --fail-fast
+          spack install -v --fail-fast
           spack clean --all
 
   build:
@@ -99,7 +100,8 @@ jobs:
       # Build UPP
       - name: build-upp
         run: |
-          sudo apt install doxygen
+          sudo apt-get update
+          sudo apt-get install -y doxygen
           source spack/share/spack/setup-env.sh
           spack env activate upp-env
           export CC=mpiicc
