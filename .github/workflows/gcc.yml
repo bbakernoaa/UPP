@@ -50,9 +50,10 @@ jobs:
           source share/spack/setup-env.sh
           spack env create upp-env ../UPP/ci/spack.yaml
           spack env activate upp-env
-          sudo apt install cmake doxygen
+          sudo apt-get update
+          sudo apt-get install -y cmake doxygen
           spack external find
-          spack add mpich@3.4.2
+          spack add mpich@3.4.2 %gcc@10
           spack concretize
           spack install -v --fail-fast --dirty
           spack clean --all
@@ -78,7 +79,8 @@ jobs:
 
       - name: build-upp
         run: |
-          sudo apt install doxygen
+          sudo apt-get update
+          sudo apt-get install -y doxygen
           source spack/share/spack/setup-env.sh
           spack env activate upp-env
           export CC=mpicc
