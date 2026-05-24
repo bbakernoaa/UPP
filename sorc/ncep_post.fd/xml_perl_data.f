@@ -11,7 +11,7 @@
 !> July,  2016 | J. Carley | Clean up prints 
 !> July, 2024  | Wen Meng  | Increase datset length
 !> May, 2025   | Ben Blake | Remove hardcoded value for tprec
-!> May, 2026   | Jules     | Add YAML support using fkYAML
+!> May, 2026   | Jules     | Add YAML support using eckit
 !>
 !------------------------------------------------------------------------
 !> @defgroup xml_perl_data_mod xml_perl_data
