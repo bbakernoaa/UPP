@@ -168,7 +168,7 @@ int yaml_get_param_array_size(int pset_idx, int param_idx, const char* key) {
                 return (int)v.size();
             } catch (...) {
                 try {
-                    std::vector<long> v = cached_params[param_idx].getIntVector(key);
+                    std::vector<int> v = cached_params[param_idx].getIntVector(key);
                     return (int)v.size();
                 } catch (...) {
                     try {
@@ -201,7 +201,7 @@ void yaml_get_param_array_float(int pset_idx, int param_idx, const char* key, fl
                 for (int i = 0; i < out_len && i < (int)v.size(); ++i) out[i] = (float)v[i];
             } catch (...) {
                 try {
-                    std::vector<long> v = param.getIntVector(key);
+                    std::vector<int> v = param.getIntVector(key);
                     for (int i = 0; i < out_len && i < (int)v.size(); ++i) out[i] = (float)v[i];
                 } catch (...) {
                     try {
@@ -232,7 +232,7 @@ void yaml_get_param_array_int(int pset_idx, int param_idx, const char* key, int*
         const auto& param = cached_params[param_idx];
         if (param.has(key)) {
             try {
-                std::vector<long> v = param.getIntVector(key);
+                std::vector<int> v = param.getIntVector(key);
                 for (int i = 0; i < out_len && i < (int)v.size(); ++i) out[i] = (int)v[i];
             } catch (...) {
                 try {
