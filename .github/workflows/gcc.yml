@@ -9,7 +9,7 @@ defaults:
     shell: bash -leo pipefail {0}
 
 env:
-  cache_key: gcc13  # The number (#) following the cache_key "gcc" is to flush Action cache.
+  cache_key: gcc14  # The number (#) following the cache_key "gcc" is to flush Action cache.
   CC: gcc-10
   FC: gfortran-10
   CXX: g++-10
@@ -88,6 +88,7 @@ jobs:
 
       - name: build-upp
         run: |
+          sudo apt install doxygen
           source spack/share/spack/setup-env.sh
           spack env activate upp-env
           export CC=mpicc
