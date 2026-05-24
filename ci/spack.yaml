@@ -2,23 +2,16 @@
 spack:
   packages:
     all:
-      compiler:
-      - intel
-      - gcc@10:10
       providers:
         mpi: [intel-oneapi-mpi, mpich]
     hdf5:
       variants: +mpi+hl+fortran
     netcdf-c:
       variants: +mpi
-    netcdf-fortran:
-      variants: +mpi
-    eckit:
-      variants: +mpi
   specs:
   - hdf5@1.14.3 +mpi+hl+fortran
   - netcdf-c@4.9.2 +mpi
-  - netcdf-fortran@4.6.1 +mpi
+  - netcdf-fortran@4.6.1
   - bacio@2.4.1
   - w3emc@2.10.0
   - g2@3.5.1
@@ -28,7 +21,7 @@ spack:
   - nemsio@2.5.4
   - wrf-io@1.2.0
   - crtm@2.4.0.1
-  - eckit@1.24.4 +mpi
+  - eckit@1.24.4
   - jasper@2.0.32
   - libpng@1.6.37
   - zlib@1.2.13
