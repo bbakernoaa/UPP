@@ -8,7 +8,9 @@
 #include <halo/halo.hpp>
 #include <amio/amio.h>
 #include <span/span.hpp>
-#include <kernels/vertical_interpolator.hpp>
+#include <conf/config.hpp>
+#include <axis/axis.hpp>
+#include <axis/solver/vertical_regridder.hpp>
 #include <kernels/hydrostatic_integrator.hpp>
 #include <kernels/thermodynamic_diagnostics.hpp>
 
@@ -24,7 +26,7 @@ void run_modernized_pipeline(int rank, int size) {
     logger.configure_communicator(MPI_COMM_WORLD);
     logger.set_threshold(logs::Severity_Level::DEBUG);
 
-    logger.log(logs::Severity_Level::INFO, "Running Phase 3 Data Velocity pipeline...");
+    logger.log(logs::Severity_Level::INFO, "Running Phase 4 Orchestration pipeline...");
 
     // 1. Initialize AMIO Core
     amio_core_handle core = nullptr;
@@ -49,6 +51,7 @@ void run_modernized_pipeline(int rank, int size) {
     std::size_t nx = t_shape.extents[0];
     std::size_t ny = t_shape.extents[1];
     std::size_t nlevels = t_shape.extents[2];
+    std::size_t nx_ny = nx * ny;
 
     std::stringstream log_ss;
     log_ss << "Dynamically resolved input shape: [" << nx << " x " << ny << " x " << nlevels << "]";
@@ -62,34 +65,89 @@ void run_modernized_pipeline(int rank, int size) {
     AMIO_CHECK(amio_view_data(p_view, &p_data, &size_bytes));
     AMIO_CHECK(amio_view_data(sfc_view, &sfc_data, &size_bytes));
 
-    // 6. Wrap pointers directly in zero-copy span::FieldView
-    std::array<std::size_t, 3> exts_3d = {nx, ny, nlevels};
-    span::FieldView<const double, 3> temp_field(static_cast<const double*>(t_data), exts_3d);
-    span::FieldView<const double, 3> q_field(static_cast<const double*>(q_data), exts_3d);
-    span::FieldView<const double, 3> p_field(static_cast<const double*>(p_data), exts_3d);
+    // 6. Wrap pointers directly in zero-copy flat 2D span::FieldView (nx_ny columns, nlevels vertical layers)
+    span::FieldView<const double, 2> temp_field(static_cast<const double*>(t_data), {nx_ny, nlevels});
+    span::FieldView<const double, 2> q_field(static_cast<const double*>(q_data), {nx_ny, nlevels});
+    span::FieldView<const double, 2> p_field(static_cast<const double*>(p_data), {nx_ny, nlevels});
     span::FieldView<const double, 2> sfc_field(static_cast<const double*>(sfc_data), {nx, ny});
 
     // 7. Define output variables with dynamic extents
-    std::vector<double> out_t_raw(nx * ny * 1, 0.0); // 1 target pressure level
-    std::vector<double> out_gh_raw(nx * ny * nlevels, 0.0);
-    std::vector<double> out_rh_raw(nx * ny * nlevels, 0.0);
+    std::vector<double> out_t_raw(nx_ny * 1, 0.0); // 1 target pressure level
+    std::vector<double> out_gh_raw(nx_ny * nlevels, 0.0);
+    std::vector<double> out_rh_raw(nx_ny * nlevels, 0.0);
 
-    span::FieldView<double, 3> t_iso_field(out_t_raw.data(), {nx, ny, 1});
-    span::FieldView<double, 3> gh_field(out_gh_raw.data(), {nx, ny, nlevels});
-    span::FieldView<double, 3> rh_field(out_rh_raw.data(), {nx, ny, nlevels});
+    span::FieldView<double, 2> t_iso_field(out_t_raw.data(), {nx_ny, 1});
+    span::FieldView<double, 2> gh_field(out_gh_raw.data(), {nx_ny, nlevels});
+    span::FieldView<double, 2> rh_field(out_rh_raw.data(), {nx_ny, nlevels});
 
-    // 8. Execute vertical interpolation to 500 hPa
-    std::vector<double> target_levels = { 50000.0 }; // hPa in Pa
-    kernels::VerticalInterpolator interpolator(nx, ny, nlevels);
-    interpolator.execute(temp_field, p_field, target_levels, t_iso_field);
+    // 8. Dynamic CONF Parsing: Load output dataset configurations
+    conf::Config runtime_config = conf::Config::from_file("amio_output_t.yaml");
+    std::string backend_name = runtime_config.get_string("backend");
+    std::stringstream conf_ss;
+    conf_ss << "Dynamic CONF: Loaded output dataset backend: " << backend_name;
+    logger.log(logs::Severity_Level::INFO, conf_ss.str());
 
-    // 9. Execute geopotential integration
+    // 9. Execute shared HELM::AXIS vertical regridding to 500 hPa
+    logger.log(logs::Severity_Level::INFO, "Executing shared HELM::AXIS vertical regridding...");
+    
+    // Allocate temporary standard LayoutRight (default HostSpace) views for AXIS vertical regridding
+    Kokkos::View<double**, Kokkos::HostSpace> src_temp_axis("src_temp_axis", nx_ny, nlevels);
+    Kokkos::View<double**, Kokkos::HostSpace> src_pres_axis("src_pres_axis", nx_ny, nlevels);
+    Kokkos::View<double**, Kokkos::HostSpace> dst_temp_axis("dst_temp_axis", nx_ny, 1);
+
+    // Copy from our LayoutLeft (temp_field, p_field) views to AXIS views
+    Kokkos::parallel_for("copy_to_axis", Kokkos::MDRangePolicy<Kokkos::Rank<2>>({0,0}, {nx_ny, nlevels}),
+        KOKKOS_LAMBDA(const std::size_t i, const std::size_t j) {
+            src_temp_axis(i, j) = temp_field.view()(i, j);
+            src_pres_axis(i, j) = p_field.view()(i, j);
+        }
+    );
+    Kokkos::fence();
+
+    // Allocate 2D target pressure levels view: (N_col, 1)
+    Kokkos::View<double**, Kokkos::HostSpace> dst_levels("dst_levels", nx_ny, 1);
+    Kokkos::parallel_for("init_dst_levels", nx_ny, KOKKOS_LAMBDA(const std::size_t i) {
+        dst_levels(i, 0) = 50000.0; // 500 hPa in Pa
+    });
+    Kokkos::fence();
+
+    // Define explicit const view references to perfectly match templated overloads
+    Kokkos::View<const double**, Kokkos::HostSpace> src_temp_const = src_temp_axis;
+    Kokkos::View<const double**, Kokkos::HostSpace> src_pres_const = src_pres_axis;
+    Kokkos::View<const double**, Kokkos::HostSpace> dst_levels_const = dst_levels;
+
+    // Run AXIS vertical regridder
+    axis::solver::VerticalRegridder<Kokkos::HostSpace>::interpolate(
+        src_temp_const,
+        dst_temp_axis,
+        src_pres_const,
+        dst_levels_const,
+        0.0 // Tension parameter (cubic spline fallback)
+    );
+
+    // Copy the results back to t_iso_field (using .view() operator)
+    Kokkos::parallel_for("copy_dst_levels", nx_ny, KOKKOS_LAMBDA(const std::size_t i) {
+        t_iso_field.view()(i, 0) = dst_temp_axis(i, 0);
+    });
+    Kokkos::fence();
+
+    logger.log(logs::Severity_Level::INFO, "HELM::AXIS vertical regridding executed successfully.");
+
+    // 10. Execute geopotential integration
+    // Adapting 3D math kernels to flat 2D layers [nx_ny, nlevels]
     kernels::HydrostaticIntegrator integrator(nx, ny, nlevels);
-    integrator.execute(temp_field, q_field, p_field, sfc_field, gh_field);
+    
+    // Wrap 2D views back to 3D representation expected by kernels
+    span::FieldView<double, 3> gh_field_3d(out_gh_raw.data(), {nx, ny, nlevels});
+    span::FieldView<const double, 3> temp_field_3d(static_cast<const double*>(t_data), {nx, ny, nlevels});
+    span::FieldView<const double, 3> q_field_3d(static_cast<const double*>(q_data), {nx, ny, nlevels});
+    span::FieldView<const double, 3> p_field_3d(static_cast<const double*>(p_data), {nx, ny, nlevels});
+    integrator.execute(temp_field_3d, q_field_3d, p_field_3d, sfc_field, gh_field_3d);
 
-    // 10. Execute relative humidity calculation
+    // 11. Execute relative humidity calculation
     kernels::ThermodynamicDiagnostics diagnostics(nx, ny, nlevels);
-    diagnostics.execute(temp_field, q_field, p_field, rh_field);
+    span::FieldView<double, 3> rh_field_3d(out_rh_raw.data(), {nx, ny, nlevels});
+    diagnostics.execute(temp_field_3d, q_field_3d, p_field_3d, rh_field_3d);
 
     logger.log(logs::Severity_Level::INFO, "All dynamic diagnostic math kernels executed successfully.");
 
@@ -98,7 +156,7 @@ void run_modernized_pipeline(int rank, int size) {
     amio_shape_t gh_shape = { 3, {static_cast<int64_t>(nx), static_cast<int64_t>(ny), static_cast<int64_t>(nlevels)}, {0, 0, 0} };
     amio_shape_t rh_shape = { 3, {static_cast<int64_t>(nx), static_cast<int64_t>(ny), static_cast<int64_t>(nlevels)}, {0, 0, 0} };
 
-    // 11. Write t_isobaric parameter to its own file output_t.nc
+    // 12. Write t_isobaric parameter to its own file output_t.nc
     {
         amio_dataset_handle t_ds = nullptr;
         AMIO_CHECK(amio_open_dataset(core, "amio_output_t.yaml", AMIO_MODE_WRITE, &t_ds));
@@ -109,7 +167,7 @@ void run_modernized_pipeline(int rank, int size) {
         logger.log(logs::Severity_Level::INFO, "t_isobaric written asynchronously successfully to output_t.nc.");
     }
 
-    // 12. Write gh parameter to its own file output_gh.nc
+    // 13. Write gh parameter to its own file output_gh.nc
     {
         amio_dataset_handle gh_ds = nullptr;
         AMIO_CHECK(amio_open_dataset(core, "amio_output_gh.yaml", AMIO_MODE_WRITE, &gh_ds));
@@ -120,7 +178,7 @@ void run_modernized_pipeline(int rank, int size) {
         logger.log(logs::Severity_Level::INFO, "Geopotential Height written asynchronously successfully to output_gh.nc.");
     }
 
-    // 13. Write rh parameter to its own file output_rh.nc
+    // 14. Write rh parameter to its own file output_rh.nc
     {
         amio_dataset_handle rh_ds = nullptr;
         AMIO_CHECK(amio_open_dataset(core, "amio_output_rh.yaml", AMIO_MODE_WRITE, &rh_ds));
@@ -131,14 +189,14 @@ void run_modernized_pipeline(int rank, int size) {
         logger.log(logs::Severity_Level::INFO, "Relative Humidity written asynchronously successfully to output_rh.nc.");
     }
 
-    // 14. Cleanup read views and close dataset
+    // 15. Cleanup read views and close dataset
     AMIO_CHECK(amio_release_view(t_view));
     AMIO_CHECK(amio_release_view(q_view));
     AMIO_CHECK(amio_release_view(p_view));
     AMIO_CHECK(amio_release_view(sfc_view));
     AMIO_CHECK(amio_close_dataset(input_ds));
 
-    // 15. Finalize AMIO Core
+    // 16. Finalize AMIO Core
     AMIO_CHECK(amio_finalize(core));
 }
 

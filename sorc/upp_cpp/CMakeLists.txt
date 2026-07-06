@@ -9,6 +9,8 @@ add_library(helm::logs ALIAS logs)
 add_library(helm::halo ALIAS halo)
 add_library(helm::tick ALIAS tick)
 add_library(helm::dagr ALIAS dagr)
+add_library(helm::axis ALIAS axis)
+add_library(helm::conf ALIAS conf)
 
 target_link_libraries(upp_cpp
     PRIVATE
@@ -18,6 +20,8 @@ target_link_libraries(upp_cpp
         helm::halo
         helm::tick
         helm::dagr
+        helm::axis
+        helm::conf
         upp_kernels
         amio_core
 )

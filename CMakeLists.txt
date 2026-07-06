@@ -45,9 +45,24 @@ if(NOT Kokkos_FOUND)
   FetchContent_Declare(
       kokkos
       GIT_REPOSITORY https://github.com/kokkos/kokkos.git
-      GIT_TAG 4.3.01
+      GIT_TAG 5.1.1
   )
   FetchContent_MakeAvailable(kokkos)
+  
+  # Generate a dummy KokkosConfig.cmake for inline subprojects (ArborX, etc.)
+  file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/cmake/Kokkos")
+  file(WRITE "${CMAKE_BINARY_DIR}/cmake/Kokkos/KokkosConfig.cmake" "
+      set(Kokkos_FOUND TRUE)
+      set(Kokkos_VERSION \"5.1.1\")
+      if(NOT TARGET Kokkos::kokkos)
+          add_library(Kokkos::kokkos ALIAS kokkos)
+      endif()
+  ")
+  file(WRITE "${CMAKE_BINARY_DIR}/cmake/Kokkos/KokkosConfigVersion.cmake" "
+      set(PACKAGE_VERSION \"5.1.1\")
+      set(PACKAGE_VERSION_COMPATIBLE TRUE)
+  ")
+  list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/cmake/Kokkos")
 endif()
 
 # Fetch kokkos/mdspan reference implementation to support C++20 standard compiler fallbacks

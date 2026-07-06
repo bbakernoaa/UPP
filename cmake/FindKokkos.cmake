@@ -3,6 +3,8 @@
 
 if(TARGET Kokkos::kokkos)
     set(Kokkos_FOUND TRUE)
+    set(Kokkos_VERSION "5.1.1")
+    set(KOKKOS_VERSION "5.1.1")
     # Define standard outputs expected by FPHSA
     set(Kokkos_INCLUDE_DIRS "")
     set(Kokkos_LIBRARIES Kokkos::kokkos)

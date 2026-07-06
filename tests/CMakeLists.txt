@@ -30,6 +30,18 @@ target_link_libraries(generate_test_nc
 add_test(NAME verify_upp_cpp
          COMMAND bash -c "$<TARGET_FILE:generate_test_nc> && rm -f output_t.nc output_gh.nc output_rh.nc && mpirun -np 1 $<TARGET_FILE:upp_cpp>")
 
+# Phase 4 C++ dynamic orchestration integration test
+add_executable(verify_orchestration test_orchestration.cpp)
+target_link_libraries(verify_orchestration
+    PRIVATE
+        axis
+        conf
+        upp_kernels
+        MPI::MPI_CXX
+)
+add_test(NAME verify_orchestration
+         COMMAND mpirun -np 1 $<TARGET_FILE:verify_orchestration>)
+
 # Set the working directory for all tests to the root build folder where manifests are located
-set_tests_properties(verify_upp_cpp verify_kernels
+set_tests_properties(verify_upp_cpp verify_kernels verify_orchestration
                      PROPERTIES WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")

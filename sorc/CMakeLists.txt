@@ -11,6 +11,18 @@ target_include_directories(span INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOUR
 add_subdirectory(helm/libs/conf)
 add_subdirectory(helm/libs/amio)
 add_subdirectory(helm/libs/dagr)
+add_subdirectory(helm/libs/axis)
+target_link_libraries(axis PRIVATE mdspan)
+target_include_directories(axis PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/upp_cpp/kernels/include>)
+if(TARGET axis_io)
+  target_link_libraries(axis_io PRIVATE mdspan)
+  target_include_directories(axis_io PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/upp_cpp/kernels/include>)
+endif()
+if(TARGET axis_fortran)
+  target_link_libraries(axis_fortran PRIVATE mdspan)
+  target_include_directories(axis_fortran PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/upp_cpp/kernels/include>)
+endif()
+
 add_subdirectory(upp_cpp/kernels)
 add_subdirectory(upp_cpp)
 
