@@ -6,3 +6,6 @@
   path = sorc/libIFI.fd
   url = https://github.com/NCAR/UPP_IFI
   update = none
+[submodule "sorc/helm"]
+	path = sorc/helm
+	url = https://github.com/bbakernoaa/helm-project
