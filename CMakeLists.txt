@@ -47,6 +47,16 @@ if(NOT Kokkos_FOUND)
   )
   FetchContent_MakeAvailable(kokkos)
 endif()
+
+# Fetch kokkos/mdspan reference implementation to support C++20 standard compiler fallbacks
+message(STATUS "Fetching mdspan reference implementation via FetchContent...")
+FetchContent_Declare(
+    mdspan
+    GIT_REPOSITORY https://github.com/kokkos/mdspan.git
+    GIT_TAG mdspan-0.6.0
+)
+FetchContent_MakeAvailable(mdspan)
+
 find_package(NetCDF REQUIRED COMPONENTS Fortran)
 
 if(OPENMP)

@@ -18,4 +18,5 @@ target_link_libraries(upp_cpp
         helm::halo
         helm::tick
         helm::dagr
+        upp_kernels
 )

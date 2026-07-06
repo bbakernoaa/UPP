@@ -5,7 +5,12 @@ endif()
 add_subdirectory(helm/libs/logs)
 add_subdirectory(helm/libs/halo)
 add_subdirectory(helm/libs/tick)
+add_subdirectory(helm/libs/span)
+target_link_libraries(span INTERFACE mdspan)
+target_include_directories(span INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/upp_cpp/kernels/include>)
+
 add_subdirectory(helm/libs/dagr)
+add_subdirectory(upp_cpp/kernels)
 add_subdirectory(upp_cpp)
 
 if(BUILD_POSTEXEC)

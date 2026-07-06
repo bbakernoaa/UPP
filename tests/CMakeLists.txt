@@ -14,3 +14,13 @@ endif()
 # Modernized C++ driver parallel verification test
 add_test(NAME verify_upp_cpp
          COMMAND mpirun -np 2 $<TARGET_FILE:upp_cpp>)
+
+# Phase 2 C++ diagnostic kernels verification test
+add_executable(verify_kernels test_kernels.cpp)
+target_link_libraries(verify_kernels
+    PRIVATE
+        upp_kernels
+        MPI::MPI_CXX
+)
+add_test(NAME verify_kernels
+         COMMAND mpirun -np 1 $<TARGET_FILE:verify_kernels>)
