@@ -1,0 +1,17 @@
+backend: netcdf4
+path: output_rh.nc
+output_path: output_rh.nc
+data_model: classic
+staging_pool:
+  buffer_count: 8
+  buffer_capacity_bytes: 65536
+worker_pool:
+  threads: 2
+prefetch:
+  depth: 4
+  read_timeout_s: 60
+staging_timeout_ms: 10000
+codec:
+  active_codec: blosc
+  lossless_allow_list:
+    - blosc

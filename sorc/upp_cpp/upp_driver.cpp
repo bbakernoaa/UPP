@@ -6,84 +6,140 @@
 #include <Kokkos_Core.hpp>
 #include <logs/logs.hpp>
 #include <halo/halo.hpp>
-#include <dagr/dagr.hpp>
-#include <dagr/pipeline_config.hpp>
+#include <amio/amio.h>
+#include <span/span.hpp>
+#include <kernels/vertical_interpolator.hpp>
+#include <kernels/hydrostatic_integrator.hpp>
+#include <kernels/thermodynamic_diagnostics.hpp>
 
-void verify_halo_exchange(int rank, int size) {
-    logs::Logger logger;
-    logger.configure_communicator(MPI_COMM_WORLD);
-    logger.set_threshold(logs::Severity_Level::DEBUG);
-
-    logger.log(logs::Severity_Level::INFO, "Starting helm::halo verification...");
-
-    // 1. Initialize HALO environment
-    halo::Environment::initialize();
-
-    // 2. Create halo communicator wrapping MPI_COMM_WORLD
-    halo::Communicator comm(MPI_COMM_WORLD);
-
-    // 3. Define 2D structured grid extents: 12x12
-    std::array<std::size_t, 2> extents = {12, 12};
-    std::array<std::size_t, 2> halo_widths = {1, 1};
-    
-    // Neighbors: west, east, south, north
-    int peer = (rank + 1) % size;
-    std::array<int, 4> neighbors = { peer, peer, peer, peer };
-
-    // 4. Instantiate Structured_Halo_Plan
-    halo::Structured_Halo_Plan<2> plan(extents, neighbors, halo_widths, comm);
-
-    // 5. Create a 2D Kokkos View with size 12x12
-    Kokkos::View<double**, Kokkos::LayoutLeft> grid("grid_data", 12, 12);
-
-    // Initialize the View
-    Kokkos::parallel_for("init_grid", Kokkos::MDRangePolicy<Kokkos::Rank<2>>({0,0}, {12,12}),
-        KOKKOS_LAMBDA(const int i, const int j) {
-            grid(i, j) = rank * 100.0 + i + j;
-        }
-    );
-
-    // 6. Perform halo boundary exchange
-    halo::exchange_structured_blocking(plan, grid);
-
-    logger.log(logs::Severity_Level::INFO, "helm::halo exchange completed successfully.");
-}
-
-void verify_dagr_resolution(int rank) {
-    logs::Logger logger;
-    logger.configure_communicator(MPI_COMM_WORLD);
-    logger.set_threshold(logs::Severity_Level::DEBUG);
-
-    if (rank == 0) {
-        logger.log(logs::Severity_Level::INFO, "Starting helm::dagr verification...");
-
-        // 1. Define a mock Pipeline_Config
-        dagr::Pipeline_Config config;
-        
-        // Add dummy task names
-        config.task_names = { "Pressure", "Temperature", "Hydrometeors", "Reflectivity" };
-        
-        // Define dependencies (producer_id -> consumer_id)
-        // Reflectivity (node 3) depends on Temperature (node 1) and Hydrometeors (node 2)
-        // Temperature (node 1) depends on Pressure (node 0)
-        config.edges = {
-            { 0, 1 }, // Pressure -> Temperature
-            { 1, 3 }, // Temperature -> Reflectivity
-            { 2, 3 }  // Hydrometeors -> Reflectivity
-        };
-        
-        config.max_concurrency = 4;
-        config.deadlock_timeout_s = 10;
-        config.shutdown_timeout_s = 10;
-
-        // 2. Instantiate GraphOrchestrator
-        halo::Communicator world(MPI_COMM_SELF);
-        
-        // Construct the orchestrator - this will parse and validate the graph
-        dagr::GraphOrchestrator orchestrator(std::move(config), std::move(world));
-
-        logger.log(logs::Severity_Level::INFO, "DAGR GraphOrchestrator constructed and validated successfully (acyclic, no cycles).");
+// Helper to check AMIO statuses
+#define AMIO_CHECK(rc) \
+    if ((rc) != AMIO_OK) { \
+        std::cerr << "AMIO Error at line " << __LINE__ << ": " << (rc) << " (" << amio_strerror(rc) << ")" << std::endl; \
+        MPI_Abort(MPI_COMM_WORLD, 1); \
     }
+
+void run_modernized_pipeline(int rank, int size) {
+    logs::Logger logger;
+    logger.configure_communicator(MPI_COMM_WORLD);
+    logger.set_threshold(logs::Severity_Level::DEBUG);
+
+    logger.log(logs::Severity_Level::INFO, "Running Phase 3 Data Velocity pipeline...");
+
+    // 1. Initialize AMIO Core
+    amio_core_handle core = nullptr;
+    AMIO_CHECK(amio_init("amio_manifest.yaml", &core));
+
+    // 2. Open input dataset in READ mode (AMIO_MODE_READ = 1)
+    amio_dataset_handle input_ds = nullptr;
+    AMIO_CHECK(amio_open_dataset(core, "amio_manifest.yaml", AMIO_MODE_READ, &input_ds));
+
+    // 3. Queue asynchronous reads (timestep 0)
+    amio_view_handle t_view = nullptr, q_view = nullptr, p_view = nullptr, sfc_view = nullptr;
+    AMIO_CHECK(amio_read(input_ds, "t", 0, nullptr, &t_view));
+    AMIO_CHECK(amio_read(input_ds, "q", 0, nullptr, &q_view));
+    AMIO_CHECK(amio_read(input_ds, "p", 0, nullptr, &p_view));
+    AMIO_CHECK(amio_read(input_ds, "sfc_g", 0, nullptr, &sfc_view));
+
+    // 4. Retrieve shapes and extract dimensions dynamically
+    amio_shape_t t_shape;
+    std::memset(&t_shape, 0, sizeof(t_shape));
+    AMIO_CHECK(amio_view_shape(t_view, &t_shape));
+
+    std::size_t nx = t_shape.extents[0];
+    std::size_t ny = t_shape.extents[1];
+    std::size_t nlevels = t_shape.extents[2];
+
+    std::stringstream log_ss;
+    log_ss << "Dynamically resolved input shape: [" << nx << " x " << ny << " x " << nlevels << "]";
+    logger.log(logs::Severity_Level::INFO, log_ss.str());
+
+    // 5. Get data pointers
+    const void *t_data = nullptr, *q_data = nullptr, *p_data = nullptr, *sfc_data = nullptr;
+    size_t size_bytes = 0;
+    AMIO_CHECK(amio_view_data(t_view, &t_data, &size_bytes));
+    AMIO_CHECK(amio_view_data(q_view, &q_data, &size_bytes));
+    AMIO_CHECK(amio_view_data(p_view, &p_data, &size_bytes));
+    AMIO_CHECK(amio_view_data(sfc_view, &sfc_data, &size_bytes));
+
+    // 6. Wrap pointers directly in zero-copy span::FieldView
+    std::array<std::size_t, 3> exts_3d = {nx, ny, nlevels};
+    span::FieldView<const double, 3> temp_field(static_cast<const double*>(t_data), exts_3d);
+    span::FieldView<const double, 3> q_field(static_cast<const double*>(q_data), exts_3d);
+    span::FieldView<const double, 3> p_field(static_cast<const double*>(p_data), exts_3d);
+    span::FieldView<const double, 2> sfc_field(static_cast<const double*>(sfc_data), {nx, ny});
+
+    // 7. Define output variables with dynamic extents
+    std::vector<double> out_t_raw(nx * ny * 1, 0.0); // 1 target pressure level
+    std::vector<double> out_gh_raw(nx * ny * nlevels, 0.0);
+    std::vector<double> out_rh_raw(nx * ny * nlevels, 0.0);
+
+    span::FieldView<double, 3> t_iso_field(out_t_raw.data(), {nx, ny, 1});
+    span::FieldView<double, 3> gh_field(out_gh_raw.data(), {nx, ny, nlevels});
+    span::FieldView<double, 3> rh_field(out_rh_raw.data(), {nx, ny, nlevels});
+
+    // 8. Execute vertical interpolation to 500 hPa
+    std::vector<double> target_levels = { 50000.0 }; // hPa in Pa
+    kernels::VerticalInterpolator interpolator(nx, ny, nlevels);
+    interpolator.execute(temp_field, p_field, target_levels, t_iso_field);
+
+    // 9. Execute geopotential integration
+    kernels::HydrostaticIntegrator integrator(nx, ny, nlevels);
+    integrator.execute(temp_field, q_field, p_field, sfc_field, gh_field);
+
+    // 10. Execute relative humidity calculation
+    kernels::ThermodynamicDiagnostics diagnostics(nx, ny, nlevels);
+    diagnostics.execute(temp_field, q_field, p_field, rh_field);
+
+    logger.log(logs::Severity_Level::INFO, "All dynamic diagnostic math kernels executed successfully.");
+
+    // Create shapes dynamically to pass to AMIO
+    amio_shape_t t_iso_shape = { 3, {static_cast<int64_t>(nx), static_cast<int64_t>(ny), 1}, {0, 0, 0} };
+    amio_shape_t gh_shape = { 3, {static_cast<int64_t>(nx), static_cast<int64_t>(ny), static_cast<int64_t>(nlevels)}, {0, 0, 0} };
+    amio_shape_t rh_shape = { 3, {static_cast<int64_t>(nx), static_cast<int64_t>(ny), static_cast<int64_t>(nlevels)}, {0, 0, 0} };
+
+    // 11. Write t_isobaric parameter to its own file output_t.nc
+    {
+        amio_dataset_handle t_ds = nullptr;
+        AMIO_CHECK(amio_open_dataset(core, "amio_output_t.yaml", AMIO_MODE_WRITE, &t_ds));
+        amio_io_handle io = nullptr;
+        AMIO_CHECK(amio_write(t_ds, "t_isobaric", out_t_raw.data(), AMIO_DTYPE_F64, &t_iso_shape, &io));
+        AMIO_CHECK(amio_wait(io, 10000));
+        AMIO_CHECK(amio_close_dataset(t_ds));
+        logger.log(logs::Severity_Level::INFO, "t_isobaric written asynchronously successfully to output_t.nc.");
+    }
+
+    // 12. Write gh parameter to its own file output_gh.nc
+    {
+        amio_dataset_handle gh_ds = nullptr;
+        AMIO_CHECK(amio_open_dataset(core, "amio_output_gh.yaml", AMIO_MODE_WRITE, &gh_ds));
+        amio_io_handle io = nullptr;
+        AMIO_CHECK(amio_write(gh_ds, "gh", out_gh_raw.data(), AMIO_DTYPE_F64, &gh_shape, &io));
+        AMIO_CHECK(amio_wait(io, 10000));
+        AMIO_CHECK(amio_close_dataset(gh_ds));
+        logger.log(logs::Severity_Level::INFO, "Geopotential Height written asynchronously successfully to output_gh.nc.");
+    }
+
+    // 13. Write rh parameter to its own file output_rh.nc
+    {
+        amio_dataset_handle rh_ds = nullptr;
+        AMIO_CHECK(amio_open_dataset(core, "amio_output_rh.yaml", AMIO_MODE_WRITE, &rh_ds));
+        amio_io_handle io = nullptr;
+        AMIO_CHECK(amio_write(rh_ds, "rh", out_rh_raw.data(), AMIO_DTYPE_F64, &rh_shape, &io));
+        AMIO_CHECK(amio_wait(io, 10000));
+        AMIO_CHECK(amio_close_dataset(rh_ds));
+        logger.log(logs::Severity_Level::INFO, "Relative Humidity written asynchronously successfully to output_rh.nc.");
+    }
+
+    // 14. Cleanup read views and close dataset
+    AMIO_CHECK(amio_release_view(t_view));
+    AMIO_CHECK(amio_release_view(q_view));
+    AMIO_CHECK(amio_release_view(p_view));
+    AMIO_CHECK(amio_release_view(sfc_view));
+    AMIO_CHECK(amio_close_dataset(input_ds));
+
+    // 15. Finalize AMIO Core
+    AMIO_CHECK(amio_finalize(core));
 }
 
 int main(int argc, char* argv[]) {
@@ -109,13 +165,10 @@ int main(int argc, char* argv[]) {
         Kokkos::print_configuration(ss);
         logger.log(logs::Severity_Level::INFO, ss.str());
 
-        // 4. Execute halo exchange verification
-        verify_halo_exchange(rank, size);
-
-        // 5. Execute DAGR verification
-        verify_dagr_resolution(rank);
+        // 4. Execute asynchronous end-to-end processing pipeline
+        run_modernized_pipeline(rank, size);
     }
-    // 6. Finalize Kokkos and MPI
+    // 5. Finalize Kokkos and MPI
     Kokkos::finalize();
     MPI_Finalize();
     return 0;

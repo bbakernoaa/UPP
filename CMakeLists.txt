@@ -9,6 +9,8 @@ project(
   VERSION ${pVersion}
   LANGUAGES Fortran C CXX)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # Handle user options.
@@ -183,4 +185,10 @@ if(BUILD_POSTEXEC)
 endif()
 
 enable_testing()
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/amio_manifest.yaml ${CMAKE_CURRENT_BINARY_DIR}/amio_manifest.yaml COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/amio_output_t.yaml ${CMAKE_CURRENT_BINARY_DIR}/amio_output_t.yaml COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/amio_output_gh.yaml ${CMAKE_CURRENT_BINARY_DIR}/amio_output_gh.yaml COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/amio_output_rh.yaml ${CMAKE_CURRENT_BINARY_DIR}/amio_output_rh.yaml COPYONLY)
+
 add_subdirectory(tests)
