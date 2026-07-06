@@ -19,4 +19,5 @@ target_link_libraries(upp_cpp
         helm::tick
         helm::dagr
         upp_kernels
+        amio_core
 )
