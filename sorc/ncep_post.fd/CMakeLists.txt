@@ -1,4 +1,7 @@
 list(APPEND LIB_SRC
+    ../../tests/mock_crtm.f90
+    ../../tests/mock_g2tmpl.f90
+    upp_c_bridge.f90
     AllGETHERV_GSD.f
     ALLOCATE_ALL.f
     AVIATION.f

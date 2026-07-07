@@ -21,6 +21,10 @@
         MPI_Abort(MPI_COMM_WORLD, 1); \
     }
 
+extern "C" {
+    void upp_handoff_to_fortran(const void* t_ptr, const void* q_ptr, const void* p_ptr, int nx, int ny, int nz);
+}
+
 void run_modernized_pipeline(int rank, int size) {
     logs::Logger logger;
     logger.configure_communicator(MPI_COMM_WORLD);
@@ -150,6 +154,14 @@ void run_modernized_pipeline(int rank, int size) {
     diagnostics.execute(temp_field_3d, q_field_3d, p_field_3d, rh_field_3d);
 
     logger.log(logs::Severity_Level::INFO, "All dynamic diagnostic math kernels executed successfully.");
+
+    // Hand off memory to legacy Fortran PROCESS driver (Zero-copy)
+    logger.log(logs::Severity_Level::INFO, "Handing off Kokkos views to legacy Fortran PROCESS...");
+    std::cout << "C++ Sample Temp at [0,0]: " << temp_field.view()(0, 0) << std::endl;
+    std::cout << "C++ Sample Humid at [0,0]: " << q_field.view()(0, 0) << std::endl;
+    std::cout << "C++ Sample Pres at [0,0]: " << p_field.view()(0, 0) << std::endl;
+    upp_handoff_to_fortran(t_data, q_data, p_data, static_cast<int>(nx), static_cast<int>(ny), static_cast<int>(nlevels));
+    logger.log(logs::Severity_Level::INFO, "Legacy Fortran execution complete.");
 
     // Create shapes dynamically to pass to AMIO
     amio_shape_t t_iso_shape = { 3, {static_cast<int64_t>(nx), static_cast<int64_t>(ny), 1}, {0, 0, 0} };

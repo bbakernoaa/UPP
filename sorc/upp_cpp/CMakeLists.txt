@@ -24,4 +24,5 @@ target_link_libraries(upp_cpp
         helm::conf
         upp_kernels
         amio_core
+        upp
 )
