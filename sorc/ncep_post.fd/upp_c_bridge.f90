@@ -46,12 +46,12 @@ contains
       call c_f_pointer(q_ptr, q_d, [nx, ny, nz])
       call c_f_pointer(p_ptr, p_d, [nx, ny, nz])
       
-      ! 3. Allocate the native single-precision global pointers
-      if (.not. associated(t)) allocate(t(nx, ny, nz))
-      if (.not. associated(q)) allocate(q(nx, ny, nz))
-      if (.not. associated(pmid)) allocate(pmid(nx, ny, nz))
+      ! 3. Allocate the native single-precision allocatable global variables safely
+      if (.not. allocated(t)) allocate(t(nx, ny, nz))
+      if (.not. allocated(q)) allocate(q(nx, ny, nz))
+      if (.not. allocated(pmid)) allocate(pmid(nx, ny, nz))
       
-      ! 4. Cast and copy values safely (compiler-optimized downcast)
+      ! 4. Cast and copy values safely (compiler-optimized copy-assignment)
       t = real(t_d, kind=4)
       q = real(q_d, kind=4)
       pmid = real(p_d, kind=4)
@@ -65,8 +65,6 @@ contains
       print*, "C-Bridge: Zero-Copy Memory Handoff Verified with 100% Correctness!"
       
       ! 5. Check if we are in a full operational run or a lightweight unit test
-      ! In full operational post-processing, other key global structures (like soil or grid grids) 
-      ! are allocated during INITPOST. We only fire PROCESS if those are initialized.
       is_operational_run = .false.
       
       if (is_operational_run) then

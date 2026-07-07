@@ -18,7 +18,7 @@
        implicit none
 !
 
-      real, pointer :: UH(:,:,:) &    !< U-component wind (U at P-points including 2 row halo)
+      real, allocatable :: UH(:,:,:) &    !< U-component wind (U at P-points including 2 row halo)
       ,VH(:,:,:) &         !< V-component wind (V at P-points including 2 row halo)
       ,WH(:,:,:) &         !< Geometric vertical velocity
       ,U(:,:,:) &          !< U-component wind
