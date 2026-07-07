@@ -212,8 +212,7 @@ set_target_properties(${LIBNAME} PROPERTIES Fortran_MODULE_DIRECTORY
 
 target_include_directories(${LIBNAME} PUBLIC
   $<BUILD_INTERFACE:${module_dir}>
-  $<INSTALL_INTERFACE:include>
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../fkyaml/include>)
+  $<INSTALL_INTERFACE:include>)
 
 target_link_libraries(${LIBNAME} PUBLIC
   bacio::bacio_4
