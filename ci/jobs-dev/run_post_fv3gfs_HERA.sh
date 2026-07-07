@@ -91,10 +91,12 @@ done
 
 #Generate master and flux files
 cp ${svndir}/parm/gfs/postxconfig-NT-gfs-two.txt ./postxconfig-NT.txt
+cp ${svndir}/parm/gfs/postxconfig-NT-gfs-two.yaml ./postxconfig-NT.yaml
 ${APRUN} ${POSTGPEXEC} < itag > outpost_master_${NEWDATE}
 
 #Generate goes file
 cp ${svndir}/parm/gfs/postxconfig-NT-gfs-goes.txt ./postxconfig-NT.txt
+cp ${svndir}/parm/gfs/postxconfig-NT-gfs-goes.yaml ./postxconfig-NT.yaml
 ${APRUN} ${POSTGPEXEC} < itag > outpost_goes_${NEWDATE}
 
 FH3=$(printf %03i $fhr)

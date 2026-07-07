@@ -70,6 +70,7 @@ EOF
 # copy fix data
 cp ${svndir}/fix/nam_micro_lookup.dat ./eta_micro_lookup.dat
 cp $homedir/fix/postxconfig-NT-GEFS-CHEM.txt ./postxconfig-NT.txt
+cp $homedir/fix/postxconfig-NT-GEFS-CHEM.yaml ./postxconfig-NT.yaml
 cp ${svndir}/parm/params_grib2_tbl_new ./params_grib2_tbl_new
 
 cp ${svndir}/fix/chem/optics_luts_DUST.dat ./optics_luts_DUST.dat

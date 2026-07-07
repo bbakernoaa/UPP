@@ -72,6 +72,7 @@ EOF
 #copy xml
 cp ${svndir}/parm/params_grib2_tbl_new params_grib2_tbl_new
 cp ${svndir}/parm/postxconfig-NT-ifi.txt postxconfig-NT.txt
+cp ${svndir}/parm/postxconfig-NT-ifi.yaml postxconfig-NT.yaml
 cp ${svndir}/fix/rap_micro_lookup.dat eta_micro_lookup.dat
 
 ${APRUN} ${POSTGPEXEC} < itag > wrfpost2.out

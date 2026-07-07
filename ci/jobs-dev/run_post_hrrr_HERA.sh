@@ -77,6 +77,7 @@ cp $homedir/fix/fix_2.3.0/*bin .
 #copy xml
 cp ${svndir}/parm/params_grib2_tbl_new params_grib2_tbl_new
 cp ${svndir}/parm/postxconfig-NT-hrrr.txt postxconfig-NT.txt
+cp ${svndir}/parm/postxconfig-NT-hrrr.yaml postxconfig-NT.yaml
 cp ${svndir}/fix/rap_micro_lookup.dat eta_micro_lookup.dat
 
 ${APRUN} ${POSTGPEXEC} < itag > wrfpost2.out

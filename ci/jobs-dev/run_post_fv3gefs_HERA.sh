@@ -67,6 +67,7 @@ EOF
 
 cp ${svndir}/fix/nam_micro_lookup.dat ./eta_micro_lookup.dat
 cp $homedir/fix/postxconfig-NT-GEFS-CHEM.txt ./postxconfig-NT.txt
+cp $homedir/fix/postxconfig-NT-GEFS-CHEM.yaml ./postxconfig-NT.yaml
 
 # copy flat files instead
 #ens_pert_type=pos_pert_fcst

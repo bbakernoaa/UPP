@@ -64,6 +64,7 @@ EOF
 # copy fix data
 cp $homedir/fix/nam_micro_lookup.dat ./eta_micro_lookup.dat
 cp ${svndir}/parm/postxconfig-NT-NMM.txt ./postxconfig-NT.txt
+cp ${svndir}/parm/postxconfig-NT-NMM.yaml ./postxconfig-NT.yaml
 cp ${svndir}/parm/params_grib2_tbl_new params_grib2_tbl_new
 
 # Run the UPP

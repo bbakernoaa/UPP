@@ -67,6 +67,7 @@ EOF
 cp ${homedir}/fix/raphrrr_fix/* .
 cp ${svndir}/parm/params_grib2_tbl_new params_grib2_tbl_new
 cp ${svndir}/parm/postxconfig-NT-rap.txt postxconfig-NT.txt
+cp ${svndir}/parm/postxconfig-NT-rap.yaml postxconfig-NT.yaml
 cp ${svndir}/fix/rap_micro_lookup.dat eta_micro_lookup.dat
 
 # Run the UPP

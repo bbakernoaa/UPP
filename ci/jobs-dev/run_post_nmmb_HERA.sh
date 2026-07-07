@@ -83,6 +83,7 @@ export PARMnam=$homedir/parm
 
 # copy flat files instead
 cp ${svndir}/parm/postxconfig-NT-NMM.txt ./postxconfig-NT.txt
+cp ${svndir}/parm/postxconfig-NT-NMM.yaml ./postxconfig-NT.yaml
 #cp ${svndir}/parm/params_grib2_tbl_new_raphrrr params_grib2_tbl_new
 #cp /scratch2/NCEPDEV/nwprod/NCEPLIBS/src/g2tmpl_v1.6.0/src/params_grib2_tbl_new params_grib2_tbl_new
 cp ${svndir}/parm/params_grib2_tbl_new params_grib2_tbl_new
