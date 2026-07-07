@@ -4,6 +4,7 @@ if(BUILD_POSTEXEC)
   set(VERIFY_EXE verify_yaml.x)
   add_executable(${VERIFY_EXE} verify_yaml.f90)
   target_link_libraries(${VERIFY_EXE} PRIVATE upp)
+  set_target_properties(${VERIFY_EXE} PROPERTIES LINKER_LANGUAGE Fortran)
 
   # Since we want to run this in CI, let's add a test for a few files.
   # Note: verify_yaml.f90 needs BOTH txt and yaml to compare.
